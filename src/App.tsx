@@ -13,7 +13,7 @@ const App = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4">
-      <h1 className="text-xl font-bold mb-4">Hello from Rick and Morty API!</h1>
+      <h1 className="text-xl font-bold mb-4">🚀 Hello from Rick and Morty API!</h1>
       <ul className="list-disc pl-4">
         {characters.map((character) => (
           <li key={character.id}>{character.name}</li>
