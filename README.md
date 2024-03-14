@@ -1,4 +1,4 @@
-# Opanuj Frontend: AI Edition
+# Rick and Morty - Catalog
 
 ![](./_resources/img/header.png)
 
