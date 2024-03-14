@@ -1,4 +1,4 @@
-# Opanuj Frontend: AI Edition
+# Rick and Morty - Characters Catalog
 
 ![](./_resources/img/header.png)
 
