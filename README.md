@@ -1,4 +1,4 @@
-# Rick and Morty - Characters Catalog
+# Rick and Morty - Catalog
 
 ![](./_resources/img/header.png)
 
