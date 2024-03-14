@@ -24,9 +24,6 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
-      - name: Build app
-        run: npm run build
-
       - name: Install Vercel CLI
         run: npm install --global vercel@canary
 
