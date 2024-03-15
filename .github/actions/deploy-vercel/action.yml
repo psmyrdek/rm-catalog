@@ -15,6 +15,7 @@ runs:
   steps:
     - name: Install Vercel CLI
       run: npm install --global vercel@canary
+      shell: bash
 
     - name: PROD Vercel Deployment
       if: ${{ inputs.mode == 'production' }}
@@ -46,4 +47,3 @@ runs:
             repo: context.repo.repo,
             body: `🔍 Preview URL: ${DEPLOY_URL}`
           });
-      shell: bash
