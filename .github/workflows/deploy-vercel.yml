@@ -1,12 +1,12 @@
-name: Deploy
+name: Deploy - Vercel
 
 on:
   workflow_call:
 
 jobs:
-  deploy:
+  deploy-vercel:
     environment:
-      name: 'Development'
+      name: 'Staging'
     runs-on: ubuntu-latest
 
     steps:
