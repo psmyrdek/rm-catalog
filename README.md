@@ -1,5 +1,4 @@
-# Rick and Morty - Characters Catalog
-
+# Rick and Morty
 ![](./_resources/img/header.png)
 
 ## Co w środku?
