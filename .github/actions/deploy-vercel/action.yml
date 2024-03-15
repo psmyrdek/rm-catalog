@@ -46,3 +46,4 @@ runs:
             repo: context.repo.repo,
             body: `🔍 Preview URL: ${DEPLOY_URL}`
           });
+      shell: bash
