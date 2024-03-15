@@ -10,6 +10,8 @@ on:
 
 jobs:
   deploy:
+    environment:
+      name: 'Staging'
     runs-on: ubuntu-latest
 
     steps:
