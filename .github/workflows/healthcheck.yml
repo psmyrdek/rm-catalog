@@ -17,3 +17,5 @@ jobs:
 
       - name: Run healthcheck
         run: node lib/healthcheck/healthcheck.js
+        env:
+          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
