@@ -3,7 +3,7 @@ locals {
 }
 
 resource "aws_cloudfront_origin_access_control" "ofe_cloudfront_acl" {
-  name                              = "s3policy"
+  name                              = "s3policyacl"
   description                       = "Default Policy"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
