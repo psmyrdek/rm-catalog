@@ -1,4 +1,4 @@
-resource "aws_cloudfront_distribution" "rm_catalog_cdn" {
+resource "aws_cloudfront_distribution" "ofe_cdn" {
   aliases                         = []
   comment                         = "RM Catalog Website"
   continuous_deployment_policy_id = null

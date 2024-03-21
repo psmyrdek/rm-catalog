@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "ofe_rmcatalog" {
+resource "aws_s3_bucket" "ofe_rm_catalog_bucket" {
   bucket              = "ofe-rmcatalog"
   bucket_prefix       = null
   force_destroy       = null
@@ -8,13 +8,5 @@ resource "aws_s3_bucket" "ofe_rmcatalog" {
   }
   tags_all = {
     Feature = "Website"
-  }
-}
-
-resource "aws_s3_bucket_website_configuration" "ofe_rmcatalog_website" {
-  bucket = aws_s3_bucket.ofe_rmcatalog.id
-
-  index_document {
-    suffix = "index.html"
   }
 }
