@@ -10,3 +10,11 @@ resource "aws_s3_bucket" "ofe_rmcatalog" {
     Feature = "Website"
   }
 }
+
+resource "aws_s3_bucket_website_configuration" "ofe_rmcatalog_website" {
+  bucket = aws_s3_bucket.ofe_rmcatalog.id
+
+  index_document {
+    suffix = "index.html"
+  }
+}
