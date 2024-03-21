@@ -1,0 +1,19 @@
+name: Hourly Healthcheck
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure node
+        uses: ./.github/actions/setup-project
+
+      - name: Run healthcheck
+        run: node lib/healthcheck/healthcheck.js
