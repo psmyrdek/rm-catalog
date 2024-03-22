@@ -1,6 +1,7 @@
 locals {
   lambda_name    = "website_healthcheck"
   tsChecksum     = filesha256("${path.cwd}/../lib/lambda-healthchecks/index.ts")
+  jsChecksum     = filesha256("${path.cwd}/../lib/lambda-healthchecks/dist/index.js")
   configChecksum = filesha256("${path.cwd}/../lib/lambda-healthchecks/tsconfig.json")
 }
 
@@ -33,7 +34,7 @@ resource "aws_lambda_function" "healthcheck_lambda" {
   role          = aws_iam_role.iam_for_lambda.arn
   handler       = "index.handler"
 
-  source_code_hash = filesha256("${path.cwd}/../lib/lambda-healthchecks/dist/index.js")
+  source_code_hash = local.jsChecksum
 
   depends_on = [terraform_data.lambda_builder]
 
