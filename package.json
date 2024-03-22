@@ -9,7 +9,7 @@
     "dev": "vite",
     "lint": "eslint src",
     "test": "vitest src",
-    "test:e2e": "npx playwright install --with-deps chromium,firefox && playwright test",
+    "test:e2e": "npx playwright install && playwright test",
     "test:e2e:ui": "playwright test --ui"
   },
   "author": "Przeprogramowani",
