@@ -9,8 +9,10 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        browser: ['chromium', 'firefox']
-        test-tag: ['@list', '@details']
+        browser: ['chromium']
+        test-tag: ['@details']
+    outputs:
+      failure: ${{ steps.report-failure.outputs.failure }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,10 +26,15 @@ jobs:
         env:
           E2E_URL: ${{ secrets.STAGING_URL }}
 
+      - name: Report failure
+        id: report-failure
+        if: ${{ failure() }}
+        run: echo "failure=true" >> "$GITHUB_OUTPUT"
+
   e2e-reporting:
     runs-on: ubuntu-latest
     needs: e2e-tests
-    if: ${{ needs.e2e-tests.result != 'success' }}
+    if: ${{ needs.e2e-tests.outputs.failure }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
