@@ -23,9 +23,12 @@ jobs:
         env:
           E2E_URL: ${{ secrets.STAGING_URL }}
 
+  e2e-reporting:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    steps:
       - name: Run healthcheck
         uses: ./.github/actions/notify-slack
-        if: ${{ failure() && steps.e2e.conclusion == 'failure' }}
         with:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_TEST_CHANNEL }}
           message: 'E2E failed on Staging! See more: https://github.com/psmyrdek/rm-catalog/actions/runs/${{ github.run_id }}'
