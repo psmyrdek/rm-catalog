@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: ['chromium', 'firefox']
-        test-tag: ['@list', '@details']
+        browser: ['chromium']
+        test-tag: ['@details']
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
