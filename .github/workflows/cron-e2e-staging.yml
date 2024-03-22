@@ -9,8 +9,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        browser: ['chromium']
-        test-tag: ['@details']
+        browser: ['chromium', 'firefox']
+        test-tag: ['@list', '@details']
     outputs:
       failure: ${{ steps.report-failure.outputs.failure }}
     steps:
@@ -34,19 +34,17 @@ jobs:
   e2e-reporting:
     runs-on: ubuntu-latest
     needs: e2e-tests
-    if: ${{ always()}}
+    if: ${{ always() && needs.e2e-tests.outputs.failure }}
     steps:
-      - run: echo "${{ needs.e2e-tests.outputs.failure }}"
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
+      - name: Configure node
+        uses: ./.github/actions/setup-project
 
-      # - name: Configure node
-      #   uses: ./.github/actions/setup-project
-
-      # - name: Report e2e failure
-      #   uses: ./.github/actions/notify-slack
-      #   with:
-      #     slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_TEST_CHANNEL }}
-      #     message: 'E2E failed on Staging! See more: https://github.com/psmyrdek/rm-catalog/actions/runs/${{ github.run_id }}'
-      #     type: 'danger'
+      - name: Report e2e failure
+        uses: ./.github/actions/notify-slack
+        with:
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_TEST_CHANNEL }}
+          message: 'E2E failed on Staging! See more: https://github.com/psmyrdek/rm-catalog/actions/runs/${{ github.run_id }}'
+          type: 'danger'
