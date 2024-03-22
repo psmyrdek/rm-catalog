@@ -27,7 +27,7 @@ jobs:
   e2e-reporting:
     runs-on: ubuntu-latest
     needs: e2e-tests
-    if: ${{ needs.e2e-tests.result == 'failure' }}
+    if: ${{ always() && needs.e2e-tests.result == 'failure' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
