@@ -1,4 +1,4 @@
-name: CRON - E2E tests
+name: CRON - E2E
 
 on:
   workflow_dispatch:
