@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { Character } from '../../lib/rick-and-morty-api-client';
 
 const CharacterDetails = () => {
@@ -36,13 +36,13 @@ const CharacterDetails = () => {
           </div>
         </div>
       </div>
-      {/* <Link
+      <Link
         to={`/`}
         className="bg-blue-500 rounded-md px-4 py-2 text-white hover:bg-blue-400"
         data-testid="characters-list-link"
       >
         Back to list
-      </Link> */}
+      </Link>
     </>
   );
 };
