@@ -7,9 +7,10 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       matrix:
-        browser: ['chromium']
-        test-tag: ['@details']
+        browser: ['chromium', 'firefox']
+        test-tag: ['@list', '@details']
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
