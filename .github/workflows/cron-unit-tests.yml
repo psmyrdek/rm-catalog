@@ -1,10 +1,10 @@
-name: Healthcheck
+name: CRON - E2E tests
 
 on:
   workflow_dispatch:
 
 jobs:
-  healthcheck:
+  e2e-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -13,13 +13,10 @@ jobs:
       - name: Configure node
         uses: ./.github/actions/setup-project
 
-      - name: Run healthcheck
-        uses: ./.github/actions/notify-slack
-        if: ${{ job.status == 'success' }}
-        with:
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_TEST_CHANNEL }}
-          message: 'Job completed successfully!'
-          type: 'good'
+      - name: Run E2E on Staging
+        run: npm run test:e2e
+        env:
+          E2E_URL: ${{ secrets.STAGING_URL }}
 
       - name: Run healthcheck
         uses: ./.github/actions/notify-slack
