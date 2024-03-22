@@ -18,13 +18,14 @@ jobs:
         uses: ./.github/actions/setup-project
 
       - name: Run E2E on Staging
+        id: e2e
         run: npm run test:e2e -- --grep ${{ matrix.test-tag }} --project ${{ matrix.browser }}
         env:
           E2E_URL: ${{ secrets.STAGING_URL }}
 
       - name: Run healthcheck
         uses: ./.github/actions/notify-slack
-        if: ${{ job.status == 'failure' }}
+        if: ${{ failure() && steps.e2e.conclusion == 'failure' }}
         with:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_TEST_CHANNEL }}
           message: 'Job failed! [See more](https://github.com/psmyrdek/rm-catalog/actions/runs/${{ github.run_id }})'
