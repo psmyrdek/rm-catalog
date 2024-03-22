@@ -10,8 +10,6 @@ export default defineConfig({
   use: {
     baseURL: process.env.E2E_URL || 'http://localhost:3000',
     trace: 'on',
-    actionTimeout: process.env.CI ? 3000 : 1000,
-    navigationTimeout: process.env.CI ? 10000 : 2000,
   },
   projects: [
     {
