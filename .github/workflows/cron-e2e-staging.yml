@@ -15,6 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Configure node
+        uses: ./.github/actions/setup-project
+
       - name: Run E2E on Staging
         id: e2e
         run: npm run test:e2e -- --grep ${{ matrix.test-tag }} --project ${{ matrix.browser }}
@@ -26,6 +29,12 @@ jobs:
     needs: e2e-tests
     if: ${{ failure() }}
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure node
+        uses: ./.github/actions/setup-project
+
       - name: Report e2e failure
         uses: ./.github/actions/notify-slack
         with:
