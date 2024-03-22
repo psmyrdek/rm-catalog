@@ -29,6 +29,8 @@ jobs:
     needs: e2e-tests
     if: ${{ always() }}
     steps:
+      - run: echo "${{ needs.e2e-tests.result }}"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
