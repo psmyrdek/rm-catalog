@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        test-tag: ['list', 'details']
+        test-tag: ['@list', '@details']
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
