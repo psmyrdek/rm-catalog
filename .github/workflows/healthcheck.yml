@@ -1,9 +1,10 @@
-name: Hourly Healthcheck
+name: Healthcheck
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'
+    # min hour day month day-of-week
+    - cron: '* * * * *'
 
 jobs:
   healthcheck:
@@ -16,6 +17,15 @@ jobs:
         uses: ./.github/actions/setup-project
 
       - name: Run healthcheck
-        run: node lib/healthcheck/healthcheck.js
-        env:
-          WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: ./.github/actions/notify-slack
+        with:
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          message: 'Healthcheck completed successfully!'
+          type: 'good'
+
+      - name: Run healthcheck
+        uses: ./.github/actions/notify-slack
+        with:
+          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          message: 'Healthcheck failed!'
+          type: 'danger'

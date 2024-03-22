@@ -1,0 +1,25 @@
+name: Notify Slack
+description: Use Slack webhook to send a notification
+
+inputs:
+  slack_webhook_url:
+    description: 'Slack webhook URL'
+    required: true
+  message:
+    description: 'Message to send'
+    required: true
+  type:
+    description: 'Type of the message - good, warning or danger'
+    required: false
+    default: 'good'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Call Slack webhook
+      run: node slack-webhook.js
+      shell: bash
+      env:
+        SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
+        NOTIFY_MESSAGE: ${{ inputs.message }}
+        NOTIFY_TYPE: ${{ inputs.type }}
