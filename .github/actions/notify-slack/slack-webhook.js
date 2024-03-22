@@ -1,3 +1,4 @@
+import axios from 'axios';
 const { SLACK_WEBHOOK_URL, NOTIFY_MESSAGE, NOTIFY_TYPE } = process.env;
 
 if (!SLACK_WEBHOOK_URL) {
@@ -14,4 +15,20 @@ const requestConfig = {
   type: NOTIFY_TYPE || 'good',
 };
 
-console.log(requestConfig);
+async function notifySlack(config) {
+  try {
+    await axios.post(config.url, {
+      text: 'GitHub Actions',
+      attachments: [
+        {
+          color: config.type,
+          text: config.message,
+        },
+      ],
+    });
+  } catch (error) {
+    console.error('Error sending message to Slack', error);
+  }
+}
+
+await notifySlack(requestConfig);
