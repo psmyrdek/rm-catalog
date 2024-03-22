@@ -17,7 +17,7 @@ runs:
   using: 'composite'
   steps:
     - name: Call Slack webhook
-      run: node slack-webhook.js
+      run: node .github/actions/notify-slack/slack-webhook.js
       shell: bash
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.slack_webhook_url }}
