@@ -6,6 +6,9 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-tag: ['list', 'details']
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -14,7 +17,7 @@ jobs:
         uses: ./.github/actions/setup-project
 
       - name: Run E2E on Staging
-        run: npm run test:e2e
+        run: npm run test:e2e -- --grep ${{ matrix.test-tag }}
         env:
           E2E_URL: ${{ secrets.STAGING_URL }}
 
