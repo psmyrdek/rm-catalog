@@ -27,5 +27,5 @@ jobs:
         if: ${{ job.status == 'failure' }}
         with:
           slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_TEST_CHANNEL }}
-          message: 'Job failed!'
+          message: 'Job failed! [See more](https://github.com/psmyrdek/rm-catalog/actions/runs/${{ github.run_id }})'
           type: 'danger'
