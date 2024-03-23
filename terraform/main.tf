@@ -21,9 +21,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-module "healthchecks" {
-  source = "./modules/healthchecks"
-
-  target_url      = "https://${aws_cloudfront_distribution.ofe_cdn_distribution.domain_name}"
-  target_selector = "id=\"app\""
+module "perf" {
+  source = "./modules/perf"
 }
