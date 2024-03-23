@@ -10,7 +10,6 @@ const Characters = () => {
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4" data-testid="characters-list">
-      <p>{import.meta.env.VITE_AWS_MONITORING_API}</p>
       <p className="font-bold mb-4">Select a character:</p>
       <ul>
         {characters.map((character) => (
