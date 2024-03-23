@@ -33,11 +33,6 @@ resource "aws_iam_role_policy" "api_gateway_logging" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "api_gw_cloudwatch" {
-  role       = aws_iam_role.iam_role_api_gateway.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
-}
-
 resource "aws_api_gateway_account" "account" {
   cloudwatch_role_arn = aws_iam_role.iam_role_api_gateway.arn
 }
@@ -107,7 +102,7 @@ resource "aws_api_gateway_stage" "prod_stage" {
   }
 }
 
-resource "aws_api_gateway_method_settings" "example" {
+resource "aws_api_gateway_method_settings" "metric_method" {
   rest_api_id = aws_api_gateway_rest_api.api.id
   stage_name  = aws_api_gateway_stage.prod_stage.stage_name
   method_path = "*/*"
@@ -117,11 +112,3 @@ resource "aws_api_gateway_method_settings" "example" {
     logging_level   = "INFO"
   }
 }
-
-output "invoke_url" {
-  value = "${aws_api_gateway_rest_api.api.execution_arn}/monitoring"
-}
-
-# output "public_invoke_url" {
-#   value = "${aws_api_gateway_deployment.api_deployment.invoke_url}/${aws_api_gateway_stage.stage.name}"
-# }
