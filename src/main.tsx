@@ -4,7 +4,6 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 import App from './App';
 import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
 import { CharacterRouteParams } from './types/types';
-import { ConfigProvider } from './context/ConfigContext';
 
 const Characters = lazy(() => import('./pages/Characters'));
 const CharacterDetails = lazy(() => import('./pages/CharacterDetails'));
@@ -32,8 +31,6 @@ const router = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById('app') as HTMLElement).render(
   <React.StrictMode>
-    <ConfigProvider>
-      <RouterProvider router={router} />
-    </ConfigProvider>
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );

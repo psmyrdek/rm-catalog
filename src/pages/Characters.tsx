@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { Character } from '../../lib/rick-and-morty-api-client';
+import { usePerformanceMetric } from '../hooks/usePerformanceMetric';
 
 const Characters = () => {
   const { characters } = useLoaderData() as { characters: Character[] };
+
+  usePerformanceMetric(characters);
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4" data-testid="characters-list">
