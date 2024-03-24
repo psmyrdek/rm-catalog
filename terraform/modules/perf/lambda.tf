@@ -1,16 +1,9 @@
-locals {
-  lambda_name    = "website_perf_check"
-  tsChecksum     = filesha256("${path.cwd}/../lib/lambda-perf/index.ts")
-  jsChecksum     = filesha256("${path.cwd}/../lib/lambda-perf/dist/index.js")
-  configChecksum = filesha256("${path.cwd}/../lib/lambda-perf/tsconfig.json")
-}
-
 resource "terraform_data" "lambda_checksum" {
-  input = local.tsChecksum
+  input = filesha256("${path.cwd}/../lib/lambda-perf/index.ts")
 }
 
 resource "terraform_data" "ts_config_checksum" {
-  input = local.configChecksum
+  input = filesha256("${path.cwd}/../lib/lambda-perf/tsconfig.json")
 }
 
 resource "terraform_data" "lambda_builder" {
@@ -81,14 +74,14 @@ resource "aws_iam_role_policy" "lambda_metric_policy" {
 }
 
 resource "aws_lambda_function" "perf_lambda" {
+  depends_on    = [terraform_data.lambda_builder]
   filename      = "${path.cwd}/../lib/lambda-perf/dist/lambda.zip"
-  function_name = local.lambda_name
+  function_name = var.lambda_function_name
   role          = aws_iam_role.iam_role_for_lambda.arn
   handler       = "index.handler"
 
-  source_code_hash = local.jsChecksum
+  source_code_hash = filesha256("${path.cwd}/../lib/lambda-perf/index.ts")
 
-  depends_on = [terraform_data.lambda_builder]
 
   runtime = "nodejs20.x"
 }

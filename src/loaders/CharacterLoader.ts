@@ -4,8 +4,19 @@ import { DefaultApi } from '../../lib/rick-and-morty-api-client';
 
 export async function fetchCharacters() {
   const api = new DefaultApi();
-  const response = await api.fetchAllCharacters();
-  return { characters: getTopCharacters(response.results!, 5) };
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      api
+        .fetchAllCharacters()
+        .then((response) => {
+          resolve({ characters: getTopCharacters(response.results!, 5) });
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    }, 2500);
+  });
 }
 
 export async function fetchCharacter({ params }: CharacterRouteParams) {

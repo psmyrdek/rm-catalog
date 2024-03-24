@@ -21,7 +21,7 @@ export const handler: Handler<EventInput, LambdaResponse> = async (event) => {
   const { loadTimeMs } = JSON.parse(event.body);
 
   if (loadTimeMs == undefined) {
-    return buildResponse(400, `Missing loadTimeMs in the request body.`);
+    return buildResponse(400, `Missing loadTimeMs in body.`);
   }
 
   const params: PutMetricDataCommandInput = {
@@ -44,7 +44,6 @@ function buildResponse(statusCode: number, body: string): LambdaResponse {
   return {
     headers: {
       'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST',
     },
     statusCode,
     body,

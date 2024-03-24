@@ -23,4 +23,6 @@ provider "aws" {
 
 module "perf" {
   source = "./modules/perf"
+
+  lambda_function_name = "website_perf_check"
 }

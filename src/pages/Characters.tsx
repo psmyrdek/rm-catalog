@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { Character } from '../../lib/rick-and-morty-api-client';
-import { usePerformanceMetric } from '../hooks/usePerformanceMetric';
 
 const Characters = () => {
   const { characters } = useLoaderData() as { characters: Character[] };
 
-  usePerformanceMetric(characters);
+  useEffect(() => {
+    const fetchData: Partial<PerformanceResourceTiming> = performance.getEntriesByName(
+      'https://rickandmortyapi.com/api/character',
+    )[0]!;
+    fetch(`${import.meta.env.VITE_AWS_MONITORING_API}/prod/monitoring`, {
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({
+        loadTimeMs: fetchData.responseEnd,
+      }),
+    });
+  }, [characters]);
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4" data-testid="characters-list">
