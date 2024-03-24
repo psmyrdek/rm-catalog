@@ -15,7 +15,7 @@ export async function fetchCharacters() {
         .catch((err) => {
           reject(err);
         });
-    }, 2500);
+    }, 0);
   });
 }
 

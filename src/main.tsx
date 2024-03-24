@@ -4,9 +4,12 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 import App from './App';
 import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
 import { CharacterRouteParams } from './types/types';
+import { initSentry } from './sentry';
 
 const Characters = lazy(() => import('./pages/Characters'));
 const CharacterDetails = lazy(() => import('./pages/CharacterDetails'));
+
+initSentry();
 
 const router = createHashRouter([
   {
