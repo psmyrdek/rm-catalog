@@ -10,6 +10,7 @@ export function usePerformanceMetric<T>(dep: T) {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_AWS_MONITORING_API}/prod/monitoring`, {
       method: 'POST',
+      mode: 'cors',
       body: JSON.stringify({
         loadTimeMs: performance.now() - renderStart.current,
       }),
