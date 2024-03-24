@@ -1,3 +1,8 @@
+resource "aws_iam_role_policy_attachment" "api_gateway_service_role_logs_policy" {
+  role       = aws_iam_role.iam_role_api_gateway.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+}
+
 resource "aws_iam_role" "iam_role_api_gateway" {
   name = "APIGatewayRole"
 
