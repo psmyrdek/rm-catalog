@@ -26,6 +26,7 @@ jobs:
         run: npm run build
         env:
           VITE_AWS_MONITORING_API: ${{ secrets.AWS_MONITORING_API }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           VITE_ENV_NAME: 'production'
 
