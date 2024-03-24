@@ -27,9 +27,6 @@ jobs:
         env:
           VITE_AWS_MONITORING_API: ${{ secrets.AWS_MONITORING_API }}
 
-      - name: Build lib
-        run: cd lib/lambda-perf && npm ci && npm run build
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4.0.2
         with:
