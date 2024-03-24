@@ -2,16 +2,11 @@ resource "terraform_data" "lambda_checksum" {
   input = filesha256("${path.cwd}/../lib/lambda-perf/index.ts")
 }
 
-resource "terraform_data" "ts_config_checksum" {
-  input = filesha256("${path.cwd}/../lib/lambda-perf/tsconfig.json")
-}
-
 resource "terraform_data" "lambda_builder" {
 
   lifecycle {
     replace_triggered_by = [
-      terraform_data.lambda_checksum,
-      terraform_data.ts_config_checksum
+      terraform_data.lambda_checksum
     ]
   }
 
