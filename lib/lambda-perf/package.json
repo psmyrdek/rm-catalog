@@ -8,7 +8,9 @@
   },
   "author": "Przeprogramowani",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.540.0"
+  },
   "devDependencies": {
     "@types/aws-lambda": "8.10.136",
     "@vercel/ncc": "0.38.1",

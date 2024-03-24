@@ -1,4 +1,8 @@
-const { CloudWatchClient, PutMetricDataCommand } = require('@aws-sdk/client-cloudwatch');
+import {
+  CloudWatchClient,
+  PutMetricDataCommand,
+  PutMetricDataCommandInput,
+} from '@aws-sdk/client-cloudwatch';
 import { Handler } from 'aws-lambda';
 
 interface EventInput {
@@ -6,6 +10,7 @@ interface EventInput {
 }
 
 interface LambdaResponse {
+  headers: { [key: string]: string };
   statusCode: number;
   body: string;
 }
@@ -15,14 +20,11 @@ const cloudWatchClient = new CloudWatchClient({ region: 'eu-central-1' });
 export const handler: Handler<EventInput, LambdaResponse> = async (event) => {
   const { loadTimeMs } = JSON.parse(event.body);
 
-  if (!loadTimeMs) {
-    return {
-      statusCode: 400,
-      body: `Missing loadTimeMs in the request body.`,
-    };
+  if (loadTimeMs == undefined) {
+    return buildResponse(400, `Missing loadTimeMs in the request body.`);
   }
 
-  const params = {
+  const params: PutMetricDataCommandInput = {
     MetricData: [
       {
         MetricName: 'WebsiteLoadTime',
@@ -35,8 +37,16 @@ export const handler: Handler<EventInput, LambdaResponse> = async (event) => {
 
   const command = new PutMetricDataCommand(params);
   await cloudWatchClient.send(command);
-  return {
-    statusCode: 200,
-    body: `Lamba executed successfully.`,
-  };
+  return buildResponse(200, `Metric sent successfully.`);
 };
+
+function buildResponse(statusCode: number, body: string): LambdaResponse {
+  return {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+    },
+    statusCode,
+    body,
+  };
+}
