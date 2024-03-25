@@ -1,25 +1,28 @@
-import { getTopCharacters } from '../utils/CharactersProcessor';
-import { CharacterRouteParams } from '../types/types';
+import { CharacterRouteParams, CharactersListRouteParams } from '../types/types';
 import { DefaultApi } from '../../lib/rick-and-morty-api-client';
 
-export async function fetchCharacters() {
-  const api = new DefaultApi();
+let _api: DefaultApi | null = null;
 
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      api
-        .fetchAllCharacters()
-        .then((response) => {
-          resolve({ characters: getTopCharacters(response.results!, 5) });
-        })
-        .catch((err) => {
-          reject(err);
-        });
-    }, 0);
-  });
+function getAPI() {
+  if (!_api) {
+    _api = new DefaultApi();
+  }
+
+  return _api;
+}
+
+export async function fetchCharacters({ params }: CharactersListRouteParams) {
+  const page = params.page ? parseInt(params.page) : 0;
+  const api = getAPI();
+
+  return api.getCharacters({ page });
 }
 
 export async function fetchCharacter({ params }: CharacterRouteParams) {
-  const api = new DefaultApi();
-  return await api.fetchSingleCharacter({ id: parseInt(params.id) });
+  if (!params.id) {
+    throw new Error('No character ID provided');
+  }
+
+  const api = getAPI();
+  return api.getSingleCharacter({ id: parseInt(params.id) });
 }

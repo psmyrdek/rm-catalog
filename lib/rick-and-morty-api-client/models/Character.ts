@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Rick and Morty API
- * API for fetching character information from Rick and Morty series
+ * Access information about characters from Rick and Morty.
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime';
 import type { CharacterLocation } from './CharacterLocation';
 import {
     CharacterLocationFromJSON,
@@ -33,37 +33,37 @@ import {
  */
 export interface Character {
     /**
-     * 
+     * The id of the character.
      * @type {number}
      * @memberof Character
      */
     id?: number;
     /**
-     * 
+     * The name of the character.
      * @type {string}
      * @memberof Character
      */
     name?: string;
     /**
-     * 
+     * The status of the character (Alive, Dead or unknown).
      * @type {string}
      * @memberof Character
      */
     status?: string;
     /**
-     * 
+     * The species of the character.
      * @type {string}
      * @memberof Character
      */
     species?: string;
     /**
-     * 
+     * The type or subspecies of the character.
      * @type {string}
      * @memberof Character
      */
     type?: string;
     /**
-     * 
+     * The gender of the character.
      * @type {string}
      * @memberof Character
      */
@@ -81,7 +81,7 @@ export interface Character {
      */
     location?: CharacterLocation;
     /**
-     * 
+     * Link to the character's image.
      * @type {string}
      * @memberof Character
      */
@@ -93,13 +93,13 @@ export interface Character {
      */
     episode?: Array<string>;
     /**
-     * 
+     * Link to the character's own URL endpoint.
      * @type {string}
      * @memberof Character
      */
     url?: string;
     /**
-     * 
+     * Time at which the character was created in the database.
      * @type {Date}
      * @memberof Character
      */
@@ -110,7 +110,9 @@ export interface Character {
  * Check if a given object implements the Character interface.
  */
 export function instanceOfCharacter(value: object): boolean {
-    return true;
+    let isInstance = true;
+
+    return isInstance;
 }
 
 export function CharacterFromJSON(json: any): Character {
@@ -118,44 +120,47 @@ export function CharacterFromJSON(json: any): Character {
 }
 
 export function CharacterFromJSONTyped(json: any, ignoreDiscriminator: boolean): Character {
-    if (json == null) {
+    if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'id': json['id'] == null ? undefined : json['id'],
-        'name': json['name'] == null ? undefined : json['name'],
-        'status': json['status'] == null ? undefined : json['status'],
-        'species': json['species'] == null ? undefined : json['species'],
-        'type': json['type'] == null ? undefined : json['type'],
-        'gender': json['gender'] == null ? undefined : json['gender'],
-        'origin': json['origin'] == null ? undefined : CharacterOriginFromJSON(json['origin']),
-        'location': json['location'] == null ? undefined : CharacterLocationFromJSON(json['location']),
-        'image': json['image'] == null ? undefined : json['image'],
-        'episode': json['episode'] == null ? undefined : json['episode'],
-        'url': json['url'] == null ? undefined : json['url'],
-        'created': json['created'] == null ? undefined : (new Date(json['created'])),
+        'id': !exists(json, 'id') ? undefined : json['id'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
+        'status': !exists(json, 'status') ? undefined : json['status'],
+        'species': !exists(json, 'species') ? undefined : json['species'],
+        'type': !exists(json, 'type') ? undefined : json['type'],
+        'gender': !exists(json, 'gender') ? undefined : json['gender'],
+        'origin': !exists(json, 'origin') ? undefined : CharacterOriginFromJSON(json['origin']),
+        'location': !exists(json, 'location') ? undefined : CharacterLocationFromJSON(json['location']),
+        'image': !exists(json, 'image') ? undefined : json['image'],
+        'episode': !exists(json, 'episode') ? undefined : json['episode'],
+        'url': !exists(json, 'url') ? undefined : json['url'],
+        'created': !exists(json, 'created') ? undefined : (new Date(json['created'])),
     };
 }
 
 export function CharacterToJSON(value?: Character | null): any {
-    if (value == null) {
-        return value;
+    if (value === undefined) {
+        return undefined;
+    }
+    if (value === null) {
+        return null;
     }
     return {
         
-        'id': value['id'],
-        'name': value['name'],
-        'status': value['status'],
-        'species': value['species'],
-        'type': value['type'],
-        'gender': value['gender'],
-        'origin': CharacterOriginToJSON(value['origin']),
-        'location': CharacterLocationToJSON(value['location']),
-        'image': value['image'],
-        'episode': value['episode'],
-        'url': value['url'],
-        'created': value['created'] == null ? undefined : ((value['created']).toISOString()),
+        'id': value.id,
+        'name': value.name,
+        'status': value.status,
+        'species': value.species,
+        'type': value.type,
+        'gender': value.gender,
+        'origin': CharacterOriginToJSON(value.origin),
+        'location': CharacterLocationToJSON(value.location),
+        'image': value.image,
+        'episode': value.episode,
+        'url': value.url,
+        'created': value.created === undefined ? undefined : (value.created.toISOString()),
     };
 }
 

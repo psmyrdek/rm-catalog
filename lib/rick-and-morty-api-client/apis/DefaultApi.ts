@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Rick and Morty API
- * API for fetching character information from Rick and Morty series
+ * Access information about characters from Rick and Morty.
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -16,16 +16,20 @@
 import * as runtime from '../runtime';
 import type {
   Character,
-  FetchAllCharacters200Response,
+  CharacterListResponse,
 } from '../models/index';
 import {
     CharacterFromJSON,
     CharacterToJSON,
-    FetchAllCharacters200ResponseFromJSON,
-    FetchAllCharacters200ResponseToJSON,
+    CharacterListResponseFromJSON,
+    CharacterListResponseToJSON,
 } from '../models/index';
 
-export interface FetchSingleCharacterRequest {
+export interface GetCharactersRequest {
+    page?: number;
+}
+
+export interface GetSingleCharacterRequest {
     id: number;
 }
 
@@ -35,16 +39,16 @@ export interface FetchSingleCharacterRequest {
 export class DefaultApi extends runtime.BaseAPI {
 
     /**
-     * Fetch all characters
+     * Fetch list of characters
      */
-    async fetchAllCharactersRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<FetchAllCharacters200Response>> {
+    async getCharactersRaw(requestParameters: GetCharactersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<CharacterListResponse>> {
         const queryParameters: any = {};
 
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // ApiKeyAuth authentication
+        if (requestParameters.page !== undefined) {
+            queryParameters['page'] = requestParameters.page;
         }
+
+        const headerParameters: runtime.HTTPHeaders = {};
 
         const response = await this.request({
             path: `/character`,
@@ -53,38 +57,31 @@ export class DefaultApi extends runtime.BaseAPI {
             query: queryParameters,
         }, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => FetchAllCharacters200ResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => CharacterListResponseFromJSON(jsonValue));
     }
 
     /**
-     * Fetch all characters
+     * Fetch list of characters
      */
-    async fetchAllCharacters(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<FetchAllCharacters200Response> {
-        const response = await this.fetchAllCharactersRaw(initOverrides);
+    async getCharacters(requestParameters: GetCharactersRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<CharacterListResponse> {
+        const response = await this.getCharactersRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Fetch a single character by ID
+     * Fetch single character by ID
      */
-    async fetchSingleCharacterRaw(requestParameters: FetchSingleCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Character>> {
-        if (requestParameters['id'] == null) {
-            throw new runtime.RequiredError(
-                'id',
-                'Required parameter "id" was null or undefined when calling fetchSingleCharacter().'
-            );
+    async getSingleCharacterRaw(requestParameters: GetSingleCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Character>> {
+        if (requestParameters.id === null || requestParameters.id === undefined) {
+            throw new runtime.RequiredError('id','Required parameter requestParameters.id was null or undefined when calling getSingleCharacter.');
         }
 
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["Authorization"] = await this.configuration.apiKey("Authorization"); // ApiKeyAuth authentication
-        }
-
         const response = await this.request({
-            path: `/character/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters['id']))),
+            path: `/character/{id}`.replace(`{${"id"}}`, encodeURIComponent(String(requestParameters.id))),
             method: 'GET',
             headers: headerParameters,
             query: queryParameters,
@@ -94,10 +91,10 @@ export class DefaultApi extends runtime.BaseAPI {
     }
 
     /**
-     * Fetch a single character by ID
+     * Fetch single character by ID
      */
-    async fetchSingleCharacter(requestParameters: FetchSingleCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Character> {
-        const response = await this.fetchSingleCharacterRaw(requestParameters, initOverrides);
+    async getSingleCharacter(requestParameters: GetSingleCharacterRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Character> {
+        const response = await this.getSingleCharacterRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

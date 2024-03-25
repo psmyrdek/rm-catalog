@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Rick and Morty API
- * API for fetching character information from Rick and Morty series
+ * Access information about characters from Rick and Morty.
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -20,13 +20,13 @@ import { mapValues } from '../runtime';
  */
 export interface CharacterOrigin {
     /**
-     * 
+     * The name of the character's origin location.
      * @type {string}
      * @memberof CharacterOrigin
      */
     name?: string;
     /**
-     * 
+     * Link to the character's origin location.
      * @type {string}
      * @memberof CharacterOrigin
      */
@@ -37,7 +37,9 @@ export interface CharacterOrigin {
  * Check if a given object implements the CharacterOrigin interface.
  */
 export function instanceOfCharacterOrigin(value: object): boolean {
-    return true;
+    let isInstance = true;
+
+    return isInstance;
 }
 
 export function CharacterOriginFromJSON(json: any): CharacterOrigin {
@@ -45,24 +47,27 @@ export function CharacterOriginFromJSON(json: any): CharacterOrigin {
 }
 
 export function CharacterOriginFromJSONTyped(json: any, ignoreDiscriminator: boolean): CharacterOrigin {
-    if (json == null) {
+    if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'name': json['name'] == null ? undefined : json['name'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
+        'url': !exists(json, 'url') ? undefined : json['url'],
     };
 }
 
 export function CharacterOriginToJSON(value?: CharacterOrigin | null): any {
-    if (value == null) {
-        return value;
+    if (value === undefined) {
+        return undefined;
+    }
+    if (value === null) {
+        return null;
     }
     return {
         
-        'name': value['name'],
-        'url': value['url'],
+        'name': value.name,
+        'url': value.url,
     };
 }
 

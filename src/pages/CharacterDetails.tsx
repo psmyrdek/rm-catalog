@@ -28,7 +28,7 @@ const CharacterDetails = () => {
             <p>Type: {character.species}</p>
             <p>Location: {character.location?.name}</p>
             <button
-              className="bg-teal-500 rounded-md px-4 py-2 text-white hover:bg-teal-400 mt-2"
+              className="bg-orange-500 rounded-md px-4 py-2 text-white hover:bg-orange-400 mt-2"
               onClick={addToFavorites}
             >
               Add to favorites

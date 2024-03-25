@@ -1,15 +1,14 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 import App from './App';
+import Characters from './pages/Characters';
+import CharacterDetails from './pages/CharacterDetails';
 import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
 import { CharacterRouteParams } from './types/types';
 import { initSentry } from './sentry';
 import { createInstance } from '@featurevisor/sdk';
 import { FeaturevisorProvider } from '@featurevisor/react';
-
-const Characters = lazy(() => import('./pages/Characters'));
-const CharacterDetails = lazy(() => import('./pages/CharacterDetails'));
 
 initSentry();
 
@@ -29,10 +28,13 @@ const router = createHashRouter([
         element: <Characters />,
       },
       {
+        path: 'list/:page',
+        loader: fetchCharacters,
+        element: <Characters />,
+      },
+      {
         path: 'character/:id',
-        loader: async ({ params }) => {
-          return fetchCharacter({ params } as CharacterRouteParams);
-        },
+        loader: fetchCharacter,
         element: <CharacterDetails />,
       },
     ],

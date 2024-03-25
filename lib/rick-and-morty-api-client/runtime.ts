@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Rick and Morty API
- * API for fetching character information from Rick and Morty series
+ * Access information about characters from Rick and Morty.
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -308,6 +308,11 @@ export interface RequestOpts {
     headers: HTTPHeaders;
     query?: HTTPQuery;
     body?: HTTPBody;
+}
+
+export function exists(json: any, key: string) {
+    const value = json[key];
+    return value !== null && value !== undefined;
 }
 
 export function querystring(params: HTTPQuery, prefix: string = ''): string {

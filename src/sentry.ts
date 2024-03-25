@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/react';
-import { customErrorProcessor } from './custom-error';
+// import { customErrorProcessor } from './custom-error';
 
 export function initSentry() {
   if (import.meta.env.VITE_ENV_NAME !== 'production') {
-    customErrorProcessor();
+    // customErrorProcessor();
     return;
   }
   Sentry.init({

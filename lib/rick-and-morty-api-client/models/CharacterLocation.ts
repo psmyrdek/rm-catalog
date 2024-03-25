@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Rick and Morty API
- * API for fetching character information from Rick and Morty series
+ * Access information about characters from Rick and Morty.
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -12,7 +12,7 @@
  * Do not edit the class manually.
  */
 
-import { mapValues } from '../runtime';
+import { exists, mapValues } from '../runtime';
 /**
  * 
  * @export
@@ -20,13 +20,13 @@ import { mapValues } from '../runtime';
  */
 export interface CharacterLocation {
     /**
-     * 
+     * The name of the character's last known location.
      * @type {string}
      * @memberof CharacterLocation
      */
     name?: string;
     /**
-     * 
+     * Link to the character's last known location.
      * @type {string}
      * @memberof CharacterLocation
      */
@@ -37,7 +37,9 @@ export interface CharacterLocation {
  * Check if a given object implements the CharacterLocation interface.
  */
 export function instanceOfCharacterLocation(value: object): boolean {
-    return true;
+    let isInstance = true;
+
+    return isInstance;
 }
 
 export function CharacterLocationFromJSON(json: any): CharacterLocation {
@@ -45,24 +47,27 @@ export function CharacterLocationFromJSON(json: any): CharacterLocation {
 }
 
 export function CharacterLocationFromJSONTyped(json: any, ignoreDiscriminator: boolean): CharacterLocation {
-    if (json == null) {
+    if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'name': json['name'] == null ? undefined : json['name'],
-        'url': json['url'] == null ? undefined : json['url'],
+        'name': !exists(json, 'name') ? undefined : json['name'],
+        'url': !exists(json, 'url') ? undefined : json['url'],
     };
 }
 
 export function CharacterLocationToJSON(value?: CharacterLocation | null): any {
-    if (value == null) {
-        return value;
+    if (value === undefined) {
+        return undefined;
+    }
+    if (value === null) {
+        return null;
     }
     return {
         
-        'name': value['name'],
-        'url': value['url'],
+        'name': value.name,
+        'url': value.url,
     };
 }
 
