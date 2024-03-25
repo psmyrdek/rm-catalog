@@ -11,7 +11,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    process.env.VITE_ENV_NAME === 'Production' &&
+    process.env.VITE_ENV_NAME === 'production' &&
       sentryVitePlugin({
         org: 'przeprogramowani-34',
         project: 'rm-catalog',
