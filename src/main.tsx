@@ -5,7 +5,6 @@ import App from './App';
 import Characters from './pages/Characters';
 import CharacterDetails from './pages/CharacterDetails';
 import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
-import { CharacterRouteParams } from './types/types';
 import { initSentry } from './sentry';
 import { createInstance } from '@featurevisor/sdk';
 import { FeaturevisorProvider } from '@featurevisor/react';
