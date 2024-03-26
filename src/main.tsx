@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { initSentry } from './sentry';
 import router from './router';
+import { createInstance } from '@featurevisor/sdk';
+import { FeaturevisorProvider } from '@featurevisor/react';
 
 initSentry();
 
+const envName = import.meta.env.VITE_ENV_NAME || 'preview';
+const featurevisor = createInstance({
+  datafileUrl: `https://d2vg9ga31syu7p.cloudfront.net/datafiles/${envName}/datafile-tag-all.json`,
+});
+
 ReactDOM.createRoot(document.getElementById('app') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <FeaturevisorProvider instance={featurevisor}>
+      <RouterProvider router={router} />
+    </FeaturevisorProvider>
   </React.StrictMode>,
 );
