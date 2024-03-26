@@ -11,7 +11,7 @@ initSentry();
 
 const envName = import.meta.env.VITE_ENV_NAME || 'preview';
 const featurevisor = createInstance({
-  datafileUrl: `https://d1bveal7jmyjgh.cloudfront.net/datafiles/${envName}/datafile-tag-all.json`,
+  datafileUrl: `https://dqgfwd4vr1p9k.cloudfront.net/datafiles/${envName}/datafile-tag-all.json`,
 });
 
 ReactDOM.createRoot(document.getElementById('app') as HTMLElement).render(
