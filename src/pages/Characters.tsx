@@ -1,14 +1,9 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { CharacterListResponse } from '../../lib/rick-and-morty-api-client';
 import CharactersPagination from './CharactersPagination';
-import { useFlag } from '@featurevisor/react';
 
 const Characters = () => {
   const { info, results: characters } = useLoaderData() as CharacterListResponse;
-
-  const isPaginationEnabled = useFlag('pagination', {
-    country: new URLSearchParams(window.location.search).get('country'),
-  });
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4" data-testid="characters-list">
@@ -32,7 +27,7 @@ const Characters = () => {
           </li>
         ))}
       </ul>
-      {isPaginationEnabled && <CharactersPagination {...info} />}
+      <CharactersPagination {...info} />
     </div>
   );
 };
