@@ -6,7 +6,9 @@ import { useFlag } from '@featurevisor/react';
 const Characters = () => {
   const { info, results: characters } = useLoaderData() as CharacterListResponse;
 
-  const isPaginationEnabled = useFlag('pagination', { country: 'pl' });
+  const isPaginationEnabled = useFlag('pagination', {
+    country: new URLSearchParams(window.location.search).get('country'),
+  });
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4" data-testid="characters-list">
