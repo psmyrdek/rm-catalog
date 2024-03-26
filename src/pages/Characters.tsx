@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { CharacterListResponse } from '../../lib/rick-and-morty-api-client';
 import CharactersPagination from './CharactersPagination';
