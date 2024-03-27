@@ -18,7 +18,7 @@ jobs:
         uses: ./.github/actions/setup-project
 
       - name: Print git diff content without pagination
-        run: git diff master...${GITHUB_REF##*/}
+        run: git diff master...${{ github.head_ref }}
 
       # - name: Lint code
       #   run: npm run lint
