@@ -25,8 +25,8 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
+      - name: Print git diff
+        run: git diff ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} >> lib/code-reviewer/diff.txt
+
       - name: Prepare lib
         run: cd lib/code-reviewer && npm ci && npm run build && npm run review
-
-      # - name: Print git diff content without pagination
-      #   run: git diff ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}

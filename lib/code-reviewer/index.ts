@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 import { Octokit } from '@octokit/rest';
 import 'dotenv/config';
+import { readFileSync } from 'fs';
 
 const [repoOwner, repoName] = process.env['GITHUB_REPO_NAME_OWNER']!.split('/');
 
@@ -12,8 +13,6 @@ const config = {
   issueNo: parseInt(process.env['ISSUE_NUMBER'] as string),
 };
 
-console.log(config);
-
 const octokit = new Octokit({
   auth: config.githubKey,
 });
@@ -24,8 +23,18 @@ const openai = new OpenAI({
 async function main() {
   console.log('Calling GPT-4...');
 
+  const diffContent = readFileSync('./diff.txt', 'utf-8');
+
+  const prompt = `
+    Conduct Code Review of the following fragment enclosed with GIT_DIFF tags:
+
+    <GIT_DIFF>
+    ${diffContent}
+    </GIT_DIFF>
+  `;
+
   const chatCompletion = await openai.chat.completions.create({
-    messages: [{ role: 'user', content: 'Say this is a test' }],
+    messages: [{ role: 'user', content: prompt }],
     model: 'gpt-4-0125-preview',
   });
 
