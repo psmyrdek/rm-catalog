@@ -27,10 +27,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          cd lib/code-reviewer &&
-          npm ci &&
-          npm run review
+        run: cd lib/code-reviewer && npm ci && npm run review
 
       # - name: Print git diff content without pagination
       #   run: git diff ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
