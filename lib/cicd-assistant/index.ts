@@ -21,9 +21,10 @@ async function main() {
 
     Follow these rules:
     - Be concise and to the point.
+    - Avoid repeating my question in the answer.
     - Do not include any sensitive information.
     - Do not repeat the same information.
-    - Avoid repeating my question in the answer.
+    - List files that are relevant to the error.
 
     The error log is wrapped with the tag ERROR_LOG.
 
