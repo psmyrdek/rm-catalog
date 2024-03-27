@@ -2,11 +2,21 @@ import OpenAI from 'openai';
 import { Octokit } from '@octokit/rest';
 import 'dotenv/config';
 
+const config = {
+  githubKey: process.env['GITHUB_TOKEN'],
+  openApiKey: process.env['OPENAI_API_KEY'],
+  repoOwner: process.env['REPO_OWNER'] as string,
+  repoName: process.env['REPO_NAME'] as string,
+  issueNo: parseInt(process.env['ISSUE_NUMBER'] as string),
+};
+
+console.log(config);
+
 const octokit = new Octokit({
-  auth: process.env['GITHUB_TOKEN'],
+  auth: config.githubKey,
 });
 const openai = new OpenAI({
-  apiKey: process.env['OPENAI_API_KEY'],
+  apiKey: config.openApiKey,
 });
 
 async function main() {
@@ -22,9 +32,9 @@ async function main() {
   console.log('Adding PullRequest comment...');
 
   octokit.rest.issues.createComment({
-    owner: 'psmyrdek',
-    repo: 'rm-catalog',
-    issue_number: 15,
+    owner: config.repoOwner,
+    repo: config.repoName,
+    issue_number: config.issueNo,
     body: modelResponse,
   });
 }
