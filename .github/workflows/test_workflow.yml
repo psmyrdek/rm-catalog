@@ -28,8 +28,8 @@ jobs:
         run: npm test
 
       - name: Run e2e
-        run: npm run e2e
+        run: npm run e2e 2> lib/cicd-assistant/error.log
 
       - name: Prepare lib
-        if: always()
-        run: cd lib/code-reviewer && npm ci && npm run build
+        if: failure()
+        run: cd lib/cicd-assistant && npm ci && npm run build && npm run start
