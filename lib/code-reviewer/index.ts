@@ -26,7 +26,13 @@ async function main() {
   const diffContent = readFileSync('./diff.txt', 'utf-8');
 
   const prompt = `
-    Conduct Code Review of the following fragment enclosed with GIT_DIFF tags:
+    Conduct Code Review of the following fragment enclosed with GIT_DIFF tags.
+
+    Follow these rules:
+    1. Do not comment on configuration files.
+    2. Do not comment on YML files.
+    3. Do not comment on the third-party library code.
+    4. When suggesting code improvements, use Markdown.
 
     <GIT_DIFF>
     ${diffContent}
