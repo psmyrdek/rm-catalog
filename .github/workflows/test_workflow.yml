@@ -6,8 +6,6 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,6 +28,8 @@ jobs:
       - name: Run e2e
         run: npm run e2e 2> lib/cicd-assistant/error.log
 
-      - name: Prepare lib
+      - name: Use assistant
         if: failure()
-        run: cd lib/cicd-assistant && npm ci > '/dev/null' 2>&1 && npm run build > '/dev/null' 2>&1 && npm run start
+        uses: ./.github/actions/describe-failure
+        with:
+          openai-token: ${{ secrets.OPENAI_API_KEY }}
