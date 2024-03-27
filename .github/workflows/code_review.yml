@@ -1,0 +1,33 @@
+name: PR Code Review
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  code-review:
+    environment:
+      name: 'Preview'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          cd lib/code-reviewer &&
+          npm ci &&
+          npm run review
+
+      # - name: Print git diff content without pagination
+      #   run: git diff ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}

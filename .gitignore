@@ -7,3 +7,5 @@ node_modules
 dist
 dist-libs
 .terraform
+.env
+.env.local
