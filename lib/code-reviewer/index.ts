@@ -48,7 +48,7 @@ async function main() {
 
   console.log('Adding PullRequest comment...');
 
-  octokit.rest.issues.createComment({
+  await octokit.rest.issues.createComment({
     owner: config.repoOwner,
     repo: config.repoName,
     issue_number: config.issueNo,
