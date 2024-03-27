@@ -3,10 +3,10 @@ import { Octokit } from '@octokit/rest';
 import 'dotenv/config';
 
 const config = {
-  githubKey: process.env['GITHUB_TOKEN'],
   openApiKey: process.env['OPENAI_API_KEY'],
-  repoOwner: process.env['REPO_OWNER'] as string,
-  repoName: process.env['REPO_NAME'] as string,
+  githubKey: process.env['GITHUB_TOKEN'],
+  repoOwner: process.env['GITHUB_REPO_OWNER'] as string,
+  repoName: process.env['GITHUB_REPO_NAME'] as string,
   issueNo: parseInt(process.env['ISSUE_NUMBER'] as string),
 };
 

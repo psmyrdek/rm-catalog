@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_REPO_NAME: ${{ github.repository }}
+      GITHUB_REPO_OWNER: ${{ github.repository_owner }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      REPO_NAME: ${{ github.repository.name }}
-      REPO_OWNER: ${{ github.repository_owner }}
       ISSUE_NUMBER: 15
     steps:
       - name: Checkout repository
