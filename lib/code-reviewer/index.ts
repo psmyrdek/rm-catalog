@@ -2,11 +2,13 @@ import OpenAI from 'openai';
 import { Octokit } from '@octokit/rest';
 import 'dotenv/config';
 
+const [repoOwner, repoName] = process.env['GITHUB_REPO_NAME_OWNER']!.split('/');
+
 const config = {
   openApiKey: process.env['OPENAI_API_KEY'],
   githubKey: process.env['GITHUB_TOKEN'],
-  repoOwner: process.env['GITHUB_REPO_OWNER'] as string,
-  repoName: process.env['GITHUB_REPO_NAME'] as string,
+  repoOwner: repoOwner,
+  repoName: repoName,
   issueNo: parseInt(process.env['ISSUE_NUMBER'] as string),
 };
 
