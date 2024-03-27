@@ -17,8 +17,8 @@ jobs:
       - name: Configure node
         uses: ./.github/actions/setup-project
 
-      - name: Print git diff
-        run: git diff --name-only ${{ github.event.before }} ${{ github.sha }}
+      - name: Print git diff content without pagination
+        run: git diff master...${GITHUB_REF##*/}
 
       # - name: Lint code
       #   run: npm run lint
