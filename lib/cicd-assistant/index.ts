@@ -7,7 +7,7 @@ const openai = new OpenAI({
 });
 
 async function main() {
-  console.log('Calling GPT-4...');
+  console.log('🔮 Calling GPT-4 to explain the issue...');
 
   const errorLog = readFileSync('./error.log', 'utf-8');
 
