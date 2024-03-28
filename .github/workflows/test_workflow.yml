@@ -30,4 +30,4 @@ jobs:
 
       - name: Use assistant
         if: failure()
-        uses: przeprogramowani/gpt-debugger@master
+        uses: przeprogramowani/gpt-debugger@main
