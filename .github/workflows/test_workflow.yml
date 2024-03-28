@@ -27,7 +27,7 @@ jobs:
 
       - name: Run e2e
         id: e2e
-        run: echo "GPT_DEBUGGER=\"$(npm run e2e 2>&1)\"" >> "$GITHUB_ENV"
+        run: npm run e2e 2> error.log && echo "GPT_DEBUG_LOG=$(cat error.log)" >> $GITHUB_ENV"
 
       - name: GPT Debugger
         if: ${{ always() }}
