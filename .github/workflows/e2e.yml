@@ -25,6 +25,6 @@ jobs:
 
       - name: GPT Debugging Action
         if: ${{ failure() }}
-        uses: przeprogramowani/gpt-debugger@0.0.1
+        uses: przeprogramowani/gpt-debugger@main
         with:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
