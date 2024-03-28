@@ -26,11 +26,10 @@ jobs:
         run: npm test
 
       - name: Run e2e
-        run: npm run e2e
+        run: npm run e2e 2> lib/cicd-assistant/error.log
 
-  debugger:
-    needs: tests
-    if: failure()
-    uses: przeprogramowani/gpt-debugger/.github/workflows/debug-workflow.yml@main
-    secrets:
-      openai-token: ${{ secrets.OPENAI_TOKEN }}
+      - name: Use assistant
+        if: failure()
+        uses: przeprogramowani/gpt-debugger@main
+        with:
+          openai-token: ${{ secrets.GPT_DEBUGGER_TOKEN }}
