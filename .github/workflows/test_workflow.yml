@@ -26,14 +26,12 @@ jobs:
         run: npm test
 
       - name: Run e2e
-        run: echo "GPT_DEBUGGER=$(npm run e2e)" >> $GITHUB_OUTPUT
+        id: e2e
+        run: echo "GPT_DEBUGGER=$(npm run e2e)" >> "$GITHUB_ENV"
 
-  debugger:
-    runs-on: ubuntu-latest
-    needs: tests
-    steps:
       - name: GPT Debugger
+        if: ${{ always() }}
         uses: przeprogramowani/gpt-debugger@main
         with:
           openai-token: ${{ secrets.OPENAI_API_KEY }}
-          debug-log: ${{ needs.tests.outputs.GPT_DEBUGGER }}
+          debug-log: ${{ env.GPT_DEBUGGER }}
