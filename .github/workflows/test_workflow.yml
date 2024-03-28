@@ -32,4 +32,4 @@ jobs:
         if: failure()
         uses: przeprogramowani/gpt-debugger@main
         with:
-          openai-token: ${{ secrets.GPT_DEBUGGER_TOKEN }}
+          openai-token: ${{ secrets.OPENAI_API_KEY }}
