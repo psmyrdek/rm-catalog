@@ -29,9 +29,12 @@ jobs:
         id: e2e
         run: echo "GPT_DEBUGGER=$(npm run e2e)" >> "$GITHUB_ENV"
 
-      - name: GPT Debugger
-        if: ${{ always() }}
-        uses: przeprogramowani/gpt-debugger@main
-        with:
-          openai-token: ${{ secrets.OPENAI_API_KEY }}
-          debug-log: ${{ env.GPT_DEBUGGER }}
+      - name: Check env
+        run: echo $GPT_DEBUGGER
+
+      # - name: GPT Debugger
+      #   if: ${{ always() }}
+      #   uses: przeprogramowani/gpt-debugger@main
+      #   with:
+      #     openai-token: ${{ secrets.OPENAI_API_KEY }}
+      #     debug-log: ${{ env.GPT_DEBUGGER }}
