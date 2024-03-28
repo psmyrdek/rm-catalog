@@ -30,6 +30,4 @@ jobs:
 
       - name: Use assistant
         if: failure()
-        uses: ./.github/actions/describe-failure
-        with:
-          openai-token: ${{ secrets.OPENAI_API_KEY }}
+        uses: przeprogramowani/gpt-debugger@master
