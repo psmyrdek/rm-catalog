@@ -33,5 +33,4 @@ jobs:
         if: ${{ always() }}
         uses: przeprogramowani/gpt-debugger@main
         with:
-          openai-token: ${{ secrets.OPENAI_API_KEY }}
-          debug-log: ${{ env.GPT_DEBUG_LOG }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
