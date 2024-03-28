@@ -27,10 +27,10 @@ jobs:
 
       - name: Run e2e
         id: e2e
-        run: echo "GPT_DEBUGGER=$(npm run e2e)" >> "$GITHUB_ENV"
+        run: echo "GPT_DEBUGGER=$(npm run e2e)" >> "$GITHUB_OUTPUT"
 
       - name: Check env
-        run: echo $GPT_DEBUGGER
+        run: echo "${{ steps.e2e.outputs.GPT_DEBUGGER }}"
 
       # - name: GPT Debugger
       #   if: ${{ always() }}
