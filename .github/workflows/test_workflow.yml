@@ -28,7 +28,7 @@ jobs:
       - name: Run e2e
         run: GPT_DEBUGGER=(npm run e2e) >> "$GITHUB_ENV"
 
-      - name: Use assistant
+      - name: GPT Debugger
         if: failure()
         uses: przeprogramowani/gpt-debugger@main
         with:
