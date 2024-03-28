@@ -24,6 +24,7 @@ jobs:
         run: npm run test:e2e > gpt_error.log
 
       - name: GPT Debugging Action
+        if: ${{ failure() }}
         uses: przeprogramowani/gpt-debugger@0.0.1
         with:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
