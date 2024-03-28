@@ -26,10 +26,9 @@ jobs:
         run: npm test
 
       - name: Run e2e
-        run: GPT_DEBUGGER=(npm run e2e) >> "$GITHUB_ENV"
+        run: GPT_DEBUGGER=$(npm run e2e)
 
       - name: GPT Debugger
-        if: failure()
         uses: przeprogramowani/gpt-debugger@main
         with:
           openai-token: ${{ secrets.OPENAI_API_KEY }}
