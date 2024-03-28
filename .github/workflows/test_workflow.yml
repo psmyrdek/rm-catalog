@@ -33,7 +33,6 @@ jobs:
     needs: tests
     steps:
       - name: GPT Debugger
-        if: ${{ failure() }}
         uses: przeprogramowani/gpt-debugger@main
         with:
           openai-token: ${{ secrets.OPENAI_API_KEY }}
