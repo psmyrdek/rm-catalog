@@ -21,4 +21,9 @@ jobs:
 
       - name: Run e2e
         id: e2e
-        run: npm run test:e2e
+        run: npm run test:e2e > gpt_error.log
+
+      - uses: przeprogramowani/gpt-debugger@main
+        if: ${{ failure() }}
+        with:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
