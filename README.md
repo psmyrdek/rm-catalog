@@ -1,4 +1,5 @@
-# Rick and Morty
+# Rick and Morty - Catalog
+
 ![](./_resources/img/header.png)
 
 ## Co w środku?
