@@ -2,17 +2,19 @@ name: PR Code Review
 
 on:
   pull_request:
-    branches:
-      - master
+    types: [opened, labeled, synchronize, reopened]
+    branches: [master]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GITHUB_REPO_NAME_OWNER: ${{ github.repository }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  ISSUE_NUMBER: ${{ github.event.pull_request.number }}
 
 jobs:
   code-review:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GITHUB_REPO_NAME_OWNER: ${{ github.repository }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      ISSUE_NUMBER: ${{ github.event.pull_request.number }}
+    if: contains(github.event.pull_request.labels.*.name, 'AI_CODE_REVIEW')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
