@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { readFileSync } from 'fs';
-import { conductCodeReview } from './openai';
-import { commentOnPullRequest } from './github';
+import { conductCodeReview } from './src/openai-client';
+import { commentOnPullRequest } from './src/github-client';
 
 const config = {
   openApiKey: process.env['OPENAI_API_KEY'],

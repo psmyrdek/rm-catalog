@@ -1,7 +1,9 @@
 import OpenAI from 'openai';
 
+const OPENAI_MODEL_VERSION = 'gpt-4-turbo-2024-04-09';
+
 export async function conductCodeReview(apiKey: string, diff: string) {
-  const openai = new OpenAI({
+  const openaiClient = new OpenAI({
     apiKey,
   });
 
@@ -22,9 +24,9 @@ export async function conductCodeReview(apiKey: string, diff: string) {
 
   console.log('Calling GPT-4...');
 
-  const chatCompletion = await openai.chat.completions.create({
+  const chatCompletion = await openaiClient.chat.completions.create({
     messages: [{ role: 'user', content: prompt }],
-    model: 'gpt-4-0125-preview',
+    model: OPENAI_MODEL_VERSION,
   });
 
   return chatCompletion.choices[0].message.content!;
