@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "build": "ncc build index.ts -o dist",
-    "review": "node dist/index.js"
+    "review": "node dist/index.js",
+    "start": "npm run build && npm run review"
   },
   "author": "Przeprogramowani",
   "license": "ISC",
   "dependencies": {
-    "@octokit/rest": "^20.0.2",
-    "dotenv": "^16.4.5",
-    "openai": "^4.29.2"
+    "@octokit/rest": "20.1.0",
+    "dotenv": "16.4.5",
+    "openai": "4.37.1"
   },
   "devDependencies": {
     "@vercel/ncc": "0.38.1",
