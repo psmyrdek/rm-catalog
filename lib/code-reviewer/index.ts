@@ -33,6 +33,7 @@ async function main() {
     2. Do not comment on YML files.
     3. Do not comment on the third-party library code.
     4. When suggesting code improvements, use Markdown.
+    5. Adjust the volume of comments based on the size of the diff.
 
     <GIT_DIFF>
     ${diffContent}
