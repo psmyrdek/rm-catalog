@@ -1,15 +1,21 @@
-## pageResolver.ts
+### Page Resolver
 
-### Purpose:
-The `pageResolver.ts` file contains a function `pageResolver` that takes a URL string as input and resolves the page number from the URL parameters. It then returns a formatted URL for a list page with the resolved page number.
+**File Path:** `/Users/przemek/dev/rm-catalog/src/utils/pageResolver.ts`
 
-### Structure:
-- The file contains a single function `pageResolver(url: string): string` that takes a URL string as input.
-- The function creates a `URL` object from the input URL and extracts the value of the 'page' parameter from the URL parameters.
-- It then returns a formatted URL string for a list page with the resolved page number appended to it.
+#### Purpose
+This file contains a function `pageResolver` that takes a URL as input and returns a string representing the resolved page based on the URL parameters. It extracts the `page` parameter value from the URL and constructs a new URL string `/list/${page}` where `page` defaults to 1 if not present.
 
-### Main Functions:
-#### `pageResolver(url: string): string`
-- Takes a URL string as input.
-- Parses the URL to extract the value of the 'page' parameter.
-- Returns a formatted URL string for a list page with the resolved page number or defaults to 1 if no page parameter is found.
+#### Structure
+```typescript
+export function pageResolver(url: string): string {
+  const urlObj = new URL(url);
+  const page = urlObj.searchParams.get('page');
+
+  return `/list/${page || 1}`;
+}
+```
+
+#### Main Functions
+- `pageResolver(url: string): string`: This function takes a URL string as input, extracts the `page` parameter value from the URL, and returns a string representing the resolved page URL. If the `page` parameter is not found in the URL, it defaults to 1.
+
+This file serves the purpose of resolving page URLs based on the `page` parameter in the input URL.

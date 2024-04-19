@@ -1,10 +1,47 @@
-# CharactersPagination.tsx
+```typescript
+/*
+## CharactersPagination Component
 
-## Purpose
-The CharactersPagination.tsx file is responsible for rendering pagination controls for navigating through a list of characters. It utilizes the react-router-dom library to generate previous and next links based on the pagination information provided.
+### Purpose:
+The `CharactersPagination` component is responsible for rendering the pagination links for navigating between pages of characters.
+It takes in `paginationInfo` object containing the information of previous and next page URLs.
 
-## Structure
-The file contains a functional component called CharactersPagination that takes in CharacterListResponseInfo as a parameter. The component renders a div with two Link components inside, one for the previous page and one for the next page.
+### Structure:
+- Import statements for necessary modules.
+- `CharactersPagination` function component definition.
+- Return statement rendering the Previous and Next links if they exist in the `paginationInfo` object.
 
-## Main Functions
-- **CharactersPagination**: This functional component renders the pagination controls for navigating through a list of characters. It checks if there is a previous or next page in the paginationInfo object and renders the appropriate Link component with the corresponding pageResolver value.
+### Main Functions:
+1. `CharactersPagination`: 
+   - Receives `paginationInfo` object as a parameter.
+   - Renders the Previous and Next links using `Link`.
+*/
+
+import { Link } from 'react-router-dom';
+import { CharacterListResponseInfo } from '../../lib/rick-and-morty-api-client';
+import { pageResolver } from '../utils/pageResolver';
+
+const CharactersPagination = (paginationInfo: CharacterListResponseInfo) => {
+  return (
+    <div className="flex flex-row justify-between">
+      <div>
+        {paginationInfo.prev && (
+          <Link to={pageResolver(paginationInfo.prev)} className="bg-gray-400 hover:underline">
+            Previous
+          </Link>
+        )}
+      </div>
+      <div>
+        {paginationInfo.next && (
+          <Link to={pageResolver(paginationInfo.next)} className="bg-gray-400 hover:underline">
+            Next
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default CharactersPagination;
+```
+```

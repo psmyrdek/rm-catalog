@@ -1,22 +1,60 @@
+```typescript
+/**
+ * ## Purpose
+ * This file serves as a CharacterLoader module that provides functions for fetching character data from the Rick and Morty API.
+ * 
+ * ## Structure
+ * - Import statements for necessary types and the DefaultApi class
+ * - Declaration of a variable _api to hold an instance of DefaultApi
+ * - Definition of a function getAPI() to initialize and return the _api instance
+ * - Exported async functions fetchCharacters() and fetchCharacter() for fetching character data using the API
+ * 
+ * ## Main Functions
+ * - getAPI(): Initializes and returns an instance of DefaultApi if not already initialized.
+ * - fetchCharacters({ params }: CharactersListRouteParams): Fetches a list of characters based on the page number provided in the params.
+ * - fetchCharacter({ params }: CharacterRouteParams): Fetches a single character's data based on the ID provided in the params.
+ */
 
-### File: CharacterLoader.ts
+import { CharacterRouteParams, CharactersListRouteParams } from '../types/types';
+import { DefaultApi } from '../../lib/rick-and-morty-api-client';
 
-**Purpose:**
-This file serves as a loader for fetching character data from the Rick and Morty API.
+let _api: DefaultApi | null = null;
 
-**Structure:**
-- Import statements for necessary types and the DefaultApi class
-- Declaration of the _api variable as null
-- Definition of the getAPI function to create a new DefaultApi instance if it doesn't exist
-- Exported async functions that interact with the API to fetch characters:
-  1. fetchCharacters: Takes CharactersListRouteParams and fetches a list of characters based on the provided page
-  2. fetchCharacter: Takes CharacterRouteParams and fetches a single character using the provided ID
+/**
+ * Fetches the DefaultApi instance, initializes if not already done
+ * @returns DefaultApi instance
+ */
+function getAPI() {
+  if (!_api) {
+    _api = new DefaultApi();
+  }
 
-**Main Functions:**
-1. `fetchCharacters({ params }: CharactersListRouteParams)`: Fetches a list of characters based on the page parameter provided. Returns a promise with the character list.
-   
-2. `fetchCharacter({ params }: CharacterRouteParams)`: Fetches a single character based on the ID parameter provided. Throws an error if no ID is provided. Returns a promise with the character data.
+  return _api;
+}
 
----
+/**
+ * Fetches a list of characters based on the page number
+ * @param params CharactersListRouteParams object containing page number
+ * @returns Promise of character data
+ */
+export async function fetchCharacters({ params }: CharactersListRouteParams) {
+  const page = params.page ? parseInt(params.page) : 0;
+  const api = getAPI();
 
-Make sure to handle errors appropriately and include necessary error handling in your application when using these functions.
+  return api.getCharacters({ page });
+}
+
+/**
+ * Fetches data of a single character based on the ID
+ * @param params CharacterRouteParams object containing character ID
+ * @returns Promise of character data
+ */
+export async function fetchCharacter({ params }: CharacterRouteParams) {
+  if (!params.id) {
+    throw new Error('No character ID provided');
+  }
+
+  const api = getAPI();
+  return api.getSingleCharacter({ id: parseInt(params.id) });
+}
+```

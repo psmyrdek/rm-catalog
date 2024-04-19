@@ -1,19 +1,33 @@
-## App.tsx
+```tsx
+import { useStatus } from '@featurevisor/react';
+import { Outlet } from 'react-router-dom';
 
-**Purpose:**
-This file defines the main component of the application - App. It uses the useStatus hook from '@featurevisor/react' and the Outlet component from 'react-router-dom' to render the main content of the application.
+const App = () => {
+  const { isReady } = useStatus();
 
-**Structure:**
-- Import:
-  - useStatus from '@featurevisor/react'
-  - Outlet from 'react-router-dom'
+  return (
+    <div>
+      <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
+        <h1 className="text-xl font-bold text-center">🚀 Rick and Morty!</h1>
+      </div>
+      {isReady && <Outlet />}
+    </div>
+  );
+};
 
-- Component:
-  - App: A functional component that retrieves the isReady status from the useStatus hook and renders the main content of the application.
+export default App;
+```
 
-**Main Functions:**
-- App: 
-  - Renders a styled header with the text "🚀 Rick and Morty!"
-  - Renders the Outlet component only if the isReady status is true.
+### Purpose:
+The `App.tsx` file is the main component of the application. It renders the main layout and checks if the application is ready before displaying the content.
 
-**Path:** /Users/przemek/dev/rm-catalog/src/App.tsx
+### Structure:
+- Imports `useStatus` from '@featurevisor/react' and `Outlet` from 'react-router-dom'.
+- Defines a functional component `App` that returns JSX elements.
+- Uses the `useStatus` hook to check if the application is ready.
+- Renders a heading "🚀 Rick and Morty!" within a styled div.
+- Conditionally renders the content of `Outlet` based on the value of `isReady`.
+
+### Main Functions:
+- `App`: Renders the main layout of the application and checks if the application is ready before displaying the content.
+```

@@ -1,24 +1,57 @@
-# File: router.tsx
+```typescript
+// File: /Users/przemek/dev/rm-catalog/src/router.tsx
 
-## Purpose:
-The `router.tsx` file is responsible for defining the routing logic for the application using react-router-dom. It handles routing paths and components to display based on the URL.
+# Router
 
-## Structure:
-- Import statements for necessary components and functions.
-- Definition of a hash router using `createHashRouter`.
-- Configuration of routes and associated components.
-- Export of the created router.
+## Purpose
+This file defines the routing configuration for the React application using React Router. It specifies the routes and their corresponding components to render based on the URL.
 
-## Main Functions:
-1. Importing components:
-   - `App`, `Characters`, and `CharacterDetails` components are imported from their respective files.
-   - `fetchCharacter` and `fetchCharacters` functions are imported from the `CharacterLoader` module.
+## Structure
+- **import Statements:** Import necessary components and functions from other files.
+- **router Constant:** Defines the routing configuration using createHashRouter from 'react-router-dom'.
+  - **Routes:** Specifies the paths, loader functions, and components to render for each route.
+    - `/`: Renders the App component with Children components.
+      - `index: true`: Loads characters using fetchCharacters and renders Characters component.
+      - `path: 'list/:page'`: Loads characters using fetchCharacters and renders Characters component.
+      - `path: 'character/:id'`: Loads a character using fetchCharacter and renders CharacterDetails component.
 
-2. Creating the router:
-   - `createHashRouter` is used to create the router.
-   - Routes are defined with paths, loaders, and components to render.
+## Main Functions
+1. `fetchCharacters`: Function to fetch a list of characters.
+2. `fetchCharacter`: Function to fetch a specific character.
+3. `createHashRouter`: Function to create a HashRouter configuration.
 
-3. Default export:
-   - The `router` object, containing the defined routes, is exported as the default export of the file.
+---
+<FILE_CONTENT>
+import App from './App';
+import Characters from './pages/Characters';
+import CharacterDetails from './pages/CharacterDetails';
+import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
+import { createHashRouter } from 'react-router-dom';
 
-Location: `/Users/przemek/dev/rm-catalog/src/router.tsx`
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        loader: fetchCharacters,
+        element: <Characters />,
+      },
+      {
+        path: 'list/:page',
+        loader: fetchCharacters,
+        element: <Characters />,
+      },
+      {
+        path: 'character/:id',
+        loader: fetchCharacter,
+        element: <CharacterDetails />,
+      },
+    ],
+  },
+]);
+
+export default router;
+</FILE_CONTENT>
+```

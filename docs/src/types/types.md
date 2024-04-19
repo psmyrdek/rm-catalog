@@ -1,17 +1,34 @@
-# File Documentation: types.ts
+## File: types.ts
 
-## Purpose
-The `types.ts` file contains various type definitions used in the RM Catalog project. These types help in maintaining consistency and ensuring type safety throughout the project.
+---
 
-## Structure
-1. `Config` interface:
-   - `appVersion`: A string representing the version of the application.
+### Purpose:
+The `types.ts` file contains type definitions used within the application for configuration settings and route parameters related to characters.
 
-2. `CharactersListRouteParams` type:
-   - `params`: An object with an optional `page` property of type string.
+### Structure:
+- **Config**:
+  - Interface with a single property `appVersion` of type `string`.
 
-3. `CharacterRouteParams` type:
-   - `params`: An object with an optional `id` property of type string.
+- **CharactersListRouteParams**:
+  - Type definition for route parameters of the characters list page, with an optional `page` parameter.
 
-## Main Functions
-The file mainly defines interfaces and types that are used for configuring the application version (`Config`), and defining the route parameters for the characters list and character details pages (`CharactersListRouteParams` and `CharacterRouteParams`). These definitions help in providing type safety and structure to the data used within the project.
+- **CharacterRouteParams**:
+  - Type definition for route parameters of an individual character page, with an optional `id` parameter.
+
+### Main Functions:
+- **Config**:
+  - Provides a structure for storing application configuration settings.
+
+- **CharactersListRouteParams** and **CharacterRouteParams**:
+  - Define the structure of route parameters for the characters list and individual character pages.
+
+---
+
+```typescript
+export interface Config {
+  appVersion: string;
+}
+
+export type CharactersListRouteParams = { params: { page?: string } };
+export type CharacterRouteParams = { params: { id?: string } };
+```

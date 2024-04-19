@@ -1,16 +1,32 @@
-## File: custom-error.ts
+### custom-error.ts
 
-### Purpose:
-The `custom-error.ts` file contains a function called `customErrorProcessor` which overrides the `window.onerror` function to capture and handle errors in the browser. It logs the error message, source URL, line number, column number, and error stack trace to the console.
+#### Purpose:
+This file defines a function `customErrorProcessor` that processes and logs errors that occur in the browser window.
 
-### Structure:
-The file defines a single function `customErrorProcessor` that replaces the global `window.onerror` function with a custom error handler. It captures error data and logs it to the console.
+#### Structure:
+```typescript
+export function customErrorProcessor() {
+  const originalOnError = window.onerror;
 
-### Main Functions:
-- **customErrorProcessor()**: 
-  - Captures error data when an error occurs in the browser.
-  - Logs the error message, source URL, line number, column number, and error stack trace to the console.
-  - Invokes the original `window.onerror` function if it exists.
+  window.onerror = function (message, source, lineno, colno, error) {
+    const errorData = {
+      message: typeof message === 'string' ? message : message.toString(),
+      url: source,
+      lineNumber: lineno,
+      columnNumber: colno,
+      errorStack: error && error.stack ? error.stack : 'Stack trace not available',
+    };
 
-### Location:
-The file is located at `/Users/przemek/dev/rm-catalog/src/custom-error.ts`.
+    console.error(`🚨 Error: ${errorData.message}`, errorData);
+
+    if (originalOnError) {
+      return originalOnError.apply(this, [message, source, lineno, colno, error]);
+    }
+
+    return true;
+  };
+}
+```
+
+#### Main Functions:
+- `customErrorProcessor`: This function sets up an error handler that logs error data to the console. It captures the error message, source URL, line number, column number, and error stack trace. If there was an existing `window.onerror` function defined, it calls the original function passing the error data as arguments.
