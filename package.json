@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "docs:generate": "cd lib/doc-creator && npm run build && PROJECT_ROOT='../../../' npm start",
     "build": "vite build",
     "dev": "vite",
     "lint": "eslint src",
