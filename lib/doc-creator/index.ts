@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import { join } from 'path';
 import { patterns, ignoreDirs } from './config.json';
-import { buildPaths } from './src/path-builder';
-import { uploadToStore } from './src/openai-client';
+import { buildPaths } from './src/path-finder';
+import { uploadToStore } from './src/openai-client/openai-utils';
 import { recreateDocs } from './src/docs-creator';
 
 const config = {

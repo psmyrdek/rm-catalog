@@ -1,70 +1,15 @@
-# File: CharacterDetails.tsx
-
-## Purpose:
-This file defines the `CharacterDetails` component, which displays detailed information about a character. It includes the character's image, name, status, species, and location. Users can also add the character to their favorites list.
-
-## Structure:
-The file consists of the following parts:
-1. **Imports**: Imports necessary modules and components.
-2. **CharacterDetails Component**: Defines the `CharacterDetails` component.
-    - Uses `useLoaderData` to retrieve character data.
-    - Displays character details, including image, name, status, species, and location.
-    - Provides a button to add the character to favorites.
-    - Includes a link to go back to the characters list page.
-
-## Main Functions:
-1. **addToFavorites()**:
-    - Purpose: Not implemented yet.
-    - Throws an error when invoked.
-
-```jsx
-import { Link, useLoaderData } from 'react-router-dom';
-import { Character } from '../../lib/rick-and-morty-api-client';
-
-const CharacterDetails = () => {
-  const character = useLoaderData() as Character;
-
-  function addToFavorites() {
-    throw new Error('Not implemented');
-  }
-
-  return (
-    <>
-      <div className="bg-white rounded-lg shadow-sm p-4 mb-4">
-        <div className="flex flex-row space-x-4" data-testid="character-details">
-          <div>
-            <img
-              src={character.image}
-              alt={`${character.name} - Profile Image`}
-              className="rounded-md"
-            />
-          </div>
-          <div className="flex-grow">
-            <p className="font-bold text-3xl border-b border-gray-300 pb-4 mb-4">
-              {character.name}
-            </p>
-            <p>Status: {character.status}</p>
-            <p>Type: {character.species}</p>
-            <p>Location: {character.location?.name}</p>
-            <button
-              className="bg-orange-500 rounded-md px-4 py-2 text-white hover:bg-orange-400 mt-2"
-              onClick={addToFavorites}
-            >
-              Add to favorites
-            </button>
-          </div>
-        </div>
-      </div>
-      <Link
-        to={`/`}
-        className="bg-blue-500 rounded-md px-4 py-2 text-white hover:bg-blue-400"
-        data-testid="characters-list-link"
-      >
-        Back to list
-      </Link>
-    </>
-  );
-};
-
-export default CharacterDetails;
+```markdown
+1. File path: /Users/przemek/dev/rm-catalog/src/pages/CharacterDetails.tsx
+2. Type: CODE
+3. Purpose: To display detailed information about a specific character from the Rick and Morty series including a profile image, name, status, species, and location. The page also provides functionality to add a character to favorites (currently not implemented) and a link to navigate back to the character list.
+4. Content:
+   - Imports specific components and hooks from 'react-router-dom' and a type definition from a local API client.
+   - Defines a `CharacterDetails` function component that fetches character data using `useLoaderData`.
+   - Displays character details including an image, name, status, species, and location.
+   - Includes a button to add the character to favorites, which is currently not implemented and will throw an error if clicked.
+   - Provides a link that navigates back to the main list of characters.
+5. Tech stack:
+   - TypeScript
+   - React
+   - Tailwind CSS
 ```

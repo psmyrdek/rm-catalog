@@ -1,47 +1,7 @@
-```typescript
-/*
-## CharactersPagination Component
-
-### Purpose:
-The `CharactersPagination` component is responsible for rendering the pagination links for navigating between pages of characters.
-It takes in `paginationInfo` object containing the information of previous and next page URLs.
-
-### Structure:
-- Import statements for necessary modules.
-- `CharactersPagination` function component definition.
-- Return statement rendering the Previous and Next links if they exist in the `paginationInfo` object.
-
-### Main Functions:
-1. `CharactersPagination`: 
-   - Receives `paginationInfo` object as a parameter.
-   - Renders the Previous and Next links using `Link`.
-*/
-
-import { Link } from 'react-router-dom';
-import { CharacterListResponseInfo } from '../../lib/rick-and-morty-api-client';
-import { pageResolver } from '../utils/pageResolver';
-
-const CharactersPagination = (paginationInfo: CharacterListResponseInfo) => {
-  return (
-    <div className="flex flex-row justify-between">
-      <div>
-        {paginationInfo.prev && (
-          <Link to={pageResolver(paginationInfo.prev)} className="bg-gray-400 hover:underline">
-            Previous
-          </Link>
-        )}
-      </div>
-      <div>
-        {paginationInfo.next && (
-          <Link to={pageResolver(paginationInfo.next)} className="bg-gray-400 hover:underline">
-            Next
-          </Link>
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default CharactersPagination;
-```
+```markdown
+1. File path: /Users/przemek/dev/rm-catalog/src/pages/CharactersPagination.tsx
+2. Type: CODE
+3. Purpose: This component is designed to render pagination controls for navigating through character lists within the Rick and Morty character catalog application. It allows the user to move to the previous or next page of character listings based on the presence of pagination information.
+4. Content: The component `CharactersPagination` takes pagination information (`CharacterListResponseInfo`), extracted from the Rick and Morty API client, as a prop. It displays a set of links ("Previous" and "Next") which are conditionally rendered based on whether the properties `prev` and `next` exist in the passed pagination information. These links use the `pageResolver` function to determine the correct path for the router links and are styled with Tailwind CSS classes.
+5. Tech stack: TypeScript, React, Tailwind CSS, react-router-dom
 ```

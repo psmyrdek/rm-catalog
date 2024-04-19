@@ -1,26 +1,5 @@
-## Sentry File Documentation
-
-**Purpose:**
-The `sentry.ts` file contains a function `initSentry` that initializes the Sentry error tracking service. It checks if the environment is set to production and initializes Sentry with the provided DSN if it is.
-
-**Structure:**
-The file consists of an import statement for the Sentry library and a single function `initSentry` that sets up Sentry for error tracking.
-
-**Main Functions:**
-1. `initSentry()`: Initializes Sentry with the provided DSN if the environment is set to production. Otherwise, it returns without initializing Sentry.
-
-```typescript
-import * as Sentry from '@sentry/react';
-// import { customErrorProcessor } from './custom-error';
-
-export function initSentry() {
-  if (import.meta.env.VITE_ENV_NAME !== 'production') {
-    // customErrorProcessor();
-    return;
-  }
-  Sentry.init({
-    dsn: import.meta.env.VITE_SENTRY_DSN,
-    integrations: [],
-  });
-}
-```
+1. File path: /Users/przemek/dev/rm-catalog/src/sentry.ts
+2. Type: CODE
+3. Purpose: Initializes Sentry error tracking for production environments in a React project.
+4. Content: The file defines a function `initSentry` which checks the environment. If it is not production, the function returns without initializing Sentry. For production environments, Sentry is initialized with a DSN (Data Source Name) and an empty list of integrations taken from the environment variables set in `import.meta.env`.
+5. Tech stack (if applicable): React, Sentry (with the @sentry/react package), JavaScript/TypeScript.

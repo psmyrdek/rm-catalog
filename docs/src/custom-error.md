@@ -1,32 +1,7 @@
-### custom-error.ts
-
-#### Purpose:
-This file defines a function `customErrorProcessor` that processes and logs errors that occur in the browser window.
-
-#### Structure:
-```typescript
-export function customErrorProcessor() {
-  const originalOnError = window.onerror;
-
-  window.onerror = function (message, source, lineno, colno, error) {
-    const errorData = {
-      message: typeof message === 'string' ? message : message.toString(),
-      url: source,
-      lineNumber: lineno,
-      columnNumber: colno,
-      errorStack: error && error.stack ? error.stack : 'Stack trace not available',
-    };
-
-    console.error(`🚨 Error: ${errorData.message}`, errorData);
-
-    if (originalOnError) {
-      return originalOnError.apply(this, [message, source, lineno, colno, error]);
-    }
-
-    return true;
-  };
-}
+```markdown
+1. File path: /Users/przemek/dev/rm-catalog/src/custom-error.ts
+2. Type: CODE
+3. Purpose: To customize global error handling by modifying the default window.onerror handler to include enhanced error logging details.
+4. Content: The `customErrorProcessor` function, once called, sets up a new global error handler that intercepts errors. This handler enhances the error data by including the message, URL where the error occurred, line number, column number, and error stack trace. It logs this information to the console more descriptively. If an existing `onerror` handler is present, it ensures that the original handler is also invoked, maintaining backward compatibility.
+5. Tech stack: JavaScript (ES6+)
 ```
-
-#### Main Functions:
-- `customErrorProcessor`: This function sets up an error handler that logs error data to the console. It captures the error message, source URL, line number, column number, and error stack trace. If there was an existing `window.onerror` function defined, it calls the original function passing the error data as arguments.

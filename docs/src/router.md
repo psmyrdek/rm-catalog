@@ -1,57 +1,20 @@
-```typescript
-// File: /Users/przemek/dev/rm-catalog/src/router.tsx
-
-# Router
-
-## Purpose
-This file defines the routing configuration for the React application using React Router. It specifies the routes and their corresponding components to render based on the URL.
-
-## Structure
-- **import Statements:** Import necessary components and functions from other files.
-- **router Constant:** Defines the routing configuration using createHashRouter from 'react-router-dom'.
-  - **Routes:** Specifies the paths, loader functions, and components to render for each route.
-    - `/`: Renders the App component with Children components.
-      - `index: true`: Loads characters using fetchCharacters and renders Characters component.
-      - `path: 'list/:page'`: Loads characters using fetchCharacters and renders Characters component.
-      - `path: 'character/:id'`: Loads a character using fetchCharacter and renders CharacterDetails component.
-
-## Main Functions
-1. `fetchCharacters`: Function to fetch a list of characters.
-2. `fetchCharacter`: Function to fetch a specific character.
-3. `createHashRouter`: Function to create a HashRouter configuration.
-
----
-<FILE_CONTENT>
-import App from './App';
-import Characters from './pages/Characters';
-import CharacterDetails from './pages/CharacterDetails';
-import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
-import { createHashRouter } from 'react-router-dom';
-
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        loader: fetchCharacters,
-        element: <Characters />,
-      },
-      {
-        path: 'list/:page',
-        loader: fetchCharacters,
-        element: <Characters />,
-      },
-      {
-        path: 'character/:id',
-        loader: fetchCharacter,
-        element: <CharacterDetails />,
-      },
-    ],
-  },
-]);
-
-export default router;
-</FILE_CONTENT>
+```markdown
+1. File path
+   /Users/przemek/dev/rm-catalog/src/router.tsx
+2. Type:
+   CODE
+3. Purpose:
+   Defines the routing configuration for the application, handling different URLs and their corresponding views and data loaders.
+4. Content:
+   - Imports `App`, `Characters`, and `CharacterDetails` components, along with data fetching functions `fetchCharacter` and `fetchCharacters`.
+   - Creates a hash-based router using `react-router-dom`, setting up routes for:
+     - The root path `/` rendering the `App` component.
+     - The default child route rendering `Characters` component, using `fetchCharacters` to load data.
+     - A paginated list route under `/list/:page` that dynamically shows `Characters` based on page number, utilizing `fetchCharacters`.
+     - A detailed view route under `/character/:id` for individual character details, using `fetchCharacter` for data loading.
+   - Exports the configured router for use across the application.
+5. Tech stack:
+   - React (for building user interfaces)
+   - react-router-dom (for managing routing)
 ```
+This Markdown formatted documentation covers the essentials of the file, presenting a clear overview for developers or maintainers.
