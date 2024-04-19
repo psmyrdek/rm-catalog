@@ -1,20 +1,47 @@
-```markdown
-1. File path
-   /Users/przemek/dev/rm-catalog/src/router.tsx
-2. Type:
-   CODE
-3. Purpose:
-   Defines the routing configuration for the application, handling different URLs and their corresponding views and data loaders.
-4. Content:
-   - Imports `App`, `Characters`, and `CharacterDetails` components, along with data fetching functions `fetchCharacter` and `fetchCharacters`.
-   - Creates a hash-based router using `react-router-dom`, setting up routes for:
-     - The root path `/` rendering the `App` component.
-     - The default child route rendering `Characters` component, using `fetchCharacters` to load data.
-     - A paginated list route under `/list/:page` that dynamically shows `Characters` based on page number, utilizing `fetchCharacters`.
-     - A detailed view route under `/character/:id` for individual character details, using `fetchCharacter` for data loading.
-   - Exports the configured router for use across the application.
-5. Tech stack:
-   - React (for building user interfaces)
-   - react-router-dom (for managing routing)
+# router.tsx
+File path: /Users/przemek/dev/rm-catalog/src/router.tsx
+
+## Type
+CODE
+
+## Purpose
+This file sets up the routing configuration for a React application using React Router. It defines the various routes and their corresponding components, as well as data loaders for fetching data required by certain routes.
+
+## File content
+```jsx
+import App from './App';
+import Characters from './pages/Characters';
+import CharacterDetails from './pages/CharacterDetails';
+import { fetchCharacter, fetchCharacters } from './loaders/CharacterLoader';
+import { createHashRouter } from 'react-router-dom';
+
+const router = createHashRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        loader: fetchCharacters,
+        element: <Characters />,
+      },
+      {
+        path: 'list/:page',
+        loader: fetchCharacters,
+        element: <Characters />,
+      },
+      {
+        path: 'character/:id',
+        loader: fetchCharacter,
+        element: <CharacterDetails />,
+      },
+    ],
+  },
+]);
+
+export default router;
 ```
-This Markdown formatted documentation covers the essentials of the file, presenting a clear overview for developers or maintainers.
+
+## Tech stack (if applicable)
+- React
+- React Router

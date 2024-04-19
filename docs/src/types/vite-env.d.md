@@ -1,16 +1,29 @@
-```markdown
-1. File path
-   `/Users/przemek/dev/rm-catalog/src/types/vite-env.d.ts`
+# vite-env.d.ts
+File path: /Users/przemek/dev/rm-catalog/src/types/vite-env.d.ts
 
-2. Type
-   CODE
+## Type
+CODE
 
-3. Purpose
-   To define TypeScript interfaces that enforce type-safety for environment variables in a Vite project.
+## Purpose
+This file defines two TypeScript interfaces: `ImportMetaEnv` and `ImportMeta`. These interfaces are used to provide type information for environment variables defined in the Vite configuration and accessed through the `import.meta.env` object in the Vite development server.
 
-4. Content
-   The code contains TypeScript interface declarations. `ImportMetaEnv` specifies the types for different environment variables (`VITE_ENV_NAME`, `VITE_SENTRY_DSN`, `VITE_AWS_MONITORING_API`), all of which are strings and are read-only. `ImportMeta` extends the global `ImportMeta` to include the `ImportMetaEnv` type for the `env` property, ensuring environment variables are accessed in a type-safe manner.
+## File content
+```typescript
+/// <reference types="vite/client" />
 
-5. Tech stack
-   TypeScript, Vite
+interface ImportMetaEnv {
+  readonly VITE_ENV_NAME: string;
+  readonly VITE_SENTRY_DSN: string;
+  readonly VITE_AWS_MONITORING_API: string;
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
 ```
+
+## Tech stack (if applicable)
+- TypeScript
+- Vite (a build tool for modern web applications)
+
+This file is specific to the Vite development environment and is used to provide type safety when accessing environment variables during the development and build process.

@@ -1,12 +1,41 @@
-```markdown
-1. File path: /Users/przemek/dev/rm-catalog/src/utils/CharactersProcessor.ts
-2. Type: CODE
-3. Purpose: Provides a function to retrieve the top 'n' characters from a list of Character objects.
-4. Content:
-   - Import: Character type from '../../lib/rick-and-morty-api-client'.
-   - Function `getTopCharacters`:
-     - Parameters: `characters` (array of Character), `top` (number)
-     - Returns: An array of the top 'n' Character objects based on the `top` parameter.
-     - Description: This function takes an array of Character objects and an integer as input, slicing the array to return only the first 'top' elements.
-5. Tech stack: TypeScript
+# CharactersProcessor.ts
+File path: /Users/przemek/dev/rm-catalog/src/utils/CharactersProcessor.ts
+
+## Type
+CODE
+
+## Purpose
+This file contains a utility function `getTopCharacters` that retrieves the top 'n' characters from a list of `Character` objects.
+
+## File content
+```typescript
+import { Character } from '../../lib/rick-and-morty-api-client';
+
+/**
+ * Retrieves the top 'n' characters from a list of Character objects.
+ *
+ * @param characters - An array of Character objects to sort.
+ * @param top - The number of top characters to return.
+ * @returns An array containing the top 'n' Character objects.
+ *
+ * @description
+ * This function accepts an array of Character objects and an integer 'top', and returns the first 'top' elements of the array.
+ *
+ * @example
+ * Here's how you might use `getTopCharacters`:
+ * ```typescript
+ * const allCharacters = [
+ *   { name: 'Character A', ... },
+ *   { name: 'Character B', ... }
+ * ];
+ * const topCharacters = getTopCharacters(allCharacters, 1);
+ * console.log(topCharacters); // Output might show the 'Character A' details if it's the most relevant based on sorting.
+ * ```
+ */
+export function getTopCharacters(characters: Character[], top: number): Character[] {
+  return characters.slice(0, top);
+}
 ```
+
+## Tech stack (if applicable)
+TypeScript
