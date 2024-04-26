@@ -5,6 +5,7 @@ import federation from '@originjs/vite-plugin-federation';
 
 export default defineConfig({
   build: {
+    target: 'esnext',
     sourcemap: true,
   },
   server: {
