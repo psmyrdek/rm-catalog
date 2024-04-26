@@ -2,6 +2,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { CharacterListResponse } from '../../lib/rick-and-morty-api-client';
 import CharactersPagination from './CharactersPagination';
 import { useFlag } from '@featurevisor/react';
+import { Suspense, lazy } from 'react';
 
 const Characters = () => {
   const { info, results: characters } = useLoaderData() as CharacterListResponse;
@@ -10,10 +11,16 @@ const Characters = () => {
     country: new URLSearchParams(window.location.search).get('country'),
   });
 
+  const EpisodeRecommendations = lazy(() => import('remote_app/EpisodeRecommendations'));
+
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4" data-testid="characters-list">
-      <p className="font-bold mb-4">Select a character:</p>
-      <ul>
+    <div data-testid="characters-list">
+      <p className="font-bold my-4">Recommended episodes:</p>
+      <Suspense fallback={<p>Loading recommendations...</p>}>
+        <EpisodeRecommendations />
+      </Suspense>
+      <p className="font-bold my-4">Choose your character:</p>
+      <ul className="bg-white rounded-lg shadow-sm p-4">
         {characters!.map((character) => (
           <li key={character.id} className="mb-4">
             <Link to={`/character/${character.id}`} data-testid={`character-link-${character.id}`}>
