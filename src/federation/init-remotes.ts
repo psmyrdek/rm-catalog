@@ -8,7 +8,7 @@ init({
   remotes: [
     {
       name: 'episodeRecommendations',
-      entry: 'https://d2mv4g2jxahmy1.cloudfront.net/mf/mf-manifest.json',
+      entry: 'https://d2mv4g2jxahmy1.cloudfront.net/mf/client/mf-manifest.json',
     },
   ],
   shared: {

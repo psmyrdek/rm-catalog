@@ -2,7 +2,7 @@ import fs, { existsSync, mkdirSync } from 'fs';
 import https from 'https';
 import unzipper from 'unzipper';
 
-const urls = ['https://d2mv4g2jxahmy1.cloudfront.net/mf/@mf-types.zip'];
+const urls = ['https://d2mv4g2jxahmy1.cloudfront.net/mf/client/@mf-types.zip'];
 
 const OUTPUT_PREFIX = './module-federation/types';
 
