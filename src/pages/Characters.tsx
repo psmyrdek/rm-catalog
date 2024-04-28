@@ -3,6 +3,7 @@ import { CharacterListResponse } from '../../lib/rick-and-morty-api-client';
 import CharactersPagination from './CharactersPagination';
 import { useFlag } from '@featurevisor/react';
 import { Suspense, lazy } from 'react';
+import { loadRemote } from '@module-federation/enhanced/runtime';
 
 const Characters = () => {
   const { info, results: characters } = useLoaderData() as CharacterListResponse;
@@ -11,7 +12,9 @@ const Characters = () => {
     country: new URLSearchParams(window.location.search).get('country'),
   });
 
-  const EpisodeRecommendations = lazy(() => import('remote_app/EpisodeRecommendations'));
+  const EpisodeRecommendations = lazy(
+    async () => await loadRemote('episodeRecommendations/EpisodeRecommendations'),
+  );
 
   return (
     <div data-testid="characters-list">
