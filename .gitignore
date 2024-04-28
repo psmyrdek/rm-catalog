@@ -9,3 +9,4 @@ dist-libs
 .terraform
 .env
 .env.local
+module-federation/types

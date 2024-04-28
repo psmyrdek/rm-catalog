@@ -5,7 +5,7 @@ import { initSentry } from './sentry';
 import router from './router';
 import { createInstance } from '@featurevisor/sdk';
 import { FeaturevisorProvider } from '@featurevisor/react';
-import './federation';
+import './federation/init-remotes';
 
 initSentry();
 

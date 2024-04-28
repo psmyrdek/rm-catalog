@@ -1,6 +1,7 @@
 import { init } from '@module-federation/enhanced/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import pkg from '../../package.json';
 
 init({
   name: 'recommendations',
@@ -12,21 +13,21 @@ init({
   ],
   shared: {
     react: {
-      version: '18.2.0',
+      version: pkg.dependencies['react'],
       lib: () => React,
       scope: 'default',
       shareConfig: {
         singleton: true,
-        requiredVersion: '^18.2.0',
+        requiredVersion: pkg.dependencies['react'],
       },
     },
     'react-dom': {
-      version: '18.2.0',
+      version: pkg.dependencies['react-dom'],
       lib: () => ReactDOM,
       scope: 'default',
       shareConfig: {
         singleton: true,
-        requiredVersion: '^18.2.0',
+        requiredVersion: pkg.dependencies['react-dom'],
       },
     },
   },
