@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 
-const OPENAI_MODEL_VERSION = 'gpt-4-turbo-2024-04-09';
+const OPENAI_MODEL_VERSION = 'gpt-4o-2024-05-13';
 
 export async function conductCodeReview(apiKey: string, diff: string) {
   const openaiClient = new OpenAI({
